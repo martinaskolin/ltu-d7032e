@@ -1,0 +1,140 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\marti\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApplesTests\\ApplesToApplesTests.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\marti\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApplesTests\\ApplesToApplesTests.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\marti\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApplesTests\\ApplesToApplesTests.csproj",
+        "projectName": "ApplesToApplesTests",
+        "projectPath": "C:\\Users\\marti\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApplesTests\\ApplesToApplesTests.csproj",
+        "packagesPath": "C:\\Users\\marti\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\marti\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApplesTests\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\marti\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "C:\\Users\\marti\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApples\\ApplesToApples.csproj": {
+                "projectPath": "C:\\Users\\marti\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApples\\ApplesToApples.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[17.7.1, )"
+            },
+            "NUnit": {
+              "target": "Package",
+              "version": "[3.13.3, )"
+            },
+            "NUnit.Analyzers": {
+              "target": "Package",
+              "version": "[3.6.1, )"
+            },
+            "NUnit3TestAdapter": {
+              "target": "Package",
+              "version": "[4.4.2, )"
+            },
+            "coverlet.collector": {
+              "target": "Package",
+              "version": "[3.2.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Users\\marti\\.dotnet\\sdk\\7.0.407\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\marti\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApples\\ApplesToApples.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\marti\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApples\\ApplesToApples.csproj",
+        "projectName": "ApplesToApples",
+        "projectPath": "C:\\Users\\marti\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApples\\ApplesToApples.csproj",
+        "packagesPath": "C:\\Users\\marti\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\marti\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApples\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\marti\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Users\\marti\\.dotnet\\sdk\\7.0.407\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

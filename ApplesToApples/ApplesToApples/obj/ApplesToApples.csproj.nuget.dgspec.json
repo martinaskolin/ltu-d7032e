@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Martin\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApples\\ApplesToApples.csproj": {}
+    "C:\\Users\\marti\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApples\\ApplesToApples.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Martin\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApples\\ApplesToApples.csproj": {
+    "C:\\Users\\marti\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApples\\ApplesToApples.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Martin\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApples\\ApplesToApples.csproj",
+        "projectUniqueName": "C:\\Users\\marti\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApples\\ApplesToApples.csproj",
         "projectName": "ApplesToApples",
-        "projectPath": "C:\\Users\\Martin\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApples\\ApplesToApples.csproj",
-        "packagesPath": "C:\\Users\\Martin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Martin\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApples\\obj\\",
+        "projectPath": "C:\\Users\\marti\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApples\\ApplesToApples.csproj",
+        "packagesPath": "C:\\Users\\marti\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\marti\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApples\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Martin\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\marti\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
@@ -53,7 +53,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.405\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Users\\marti\\.dotnet\\sdk\\7.0.407\\RuntimeIdentifierGraph.json"
         }
       }
     }
