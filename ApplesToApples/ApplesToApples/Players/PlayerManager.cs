@@ -2,10 +2,13 @@ namespace ApplesToApples.Players;
 
 public class PlayerManager
 {
-    public event Action<IPlayerController> OnJudgeChanged;
+    public readonly List<IPlayerController> Players = new List<IPlayerController>();
+    public readonly List<PlayerPawn> Pawns = new List<PlayerPawn>();
 
-    public readonly List<IPlayerController> Players;
-    public readonly List<PlayerPawn> Pawns;
-    public readonly IPlayerController Judge;
-
+    public void AddPlayer(IPlayerController controller)
+    {
+        controller.Pawn = new PlayerPawn();
+        Players.Add(controller);
+        Pawns.Add(controller.Pawn);
+    }
 }

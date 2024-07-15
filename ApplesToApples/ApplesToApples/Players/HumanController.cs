@@ -1,11 +1,19 @@
 using ApplesToApples.Cards;
+using ApplesToApples.Networking;
 
 namespace ApplesToApples.Players;
 
 public class HumanController : IPlayerController
 {
-    private PlayerPawn _pawn;
+    public PlayerPawn Pawn { get; set; }
     
+    private IServerIO _io;
+
+    public HumanController(IServerIO io)
+    {
+        _io = io;
+    }
+
     public Task<RedApple> Play(GreenApple greenApple)
     {
         throw new NotImplementedException();

@@ -21,7 +21,7 @@ public class SubmitPhase : IPhase
         List<Task<RedApple>> tasks = new List<Task<RedApple>>();
         foreach (IPlayerController controller in _controllers)
         {
-            tasks.Add(controller.Play(_greenApple ?? throw new NullReferenceException("No green apple has been set!")));
+            tasks.Add(controller.Play(_greenApple ?? throw new NullReferenceException("No green apple has been set")));
         }
 
         await Task.WhenAll(tasks.ToArray());

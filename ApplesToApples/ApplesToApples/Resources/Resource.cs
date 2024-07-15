@@ -30,9 +30,9 @@ public static class Resource
         return _stringMng.GetString(name);
     }
 
-    public static List<IRedApple> GetRedApples()
+    public static List<RedApple> GetRedApples()
     {
-        List<IRedApple> redApples = new List<IRedApple>();
+        List<RedApple> redApples = new List<RedApple>();
         string[] nouns = GetString("RedApples").Split('\n') ?? throw new InvalidOperationException("Could not fetch Red Apples");
         
         foreach (string noun in nouns)

@@ -5,11 +5,11 @@ namespace ApplesToApples.Cards;
 public class RedApple : IRedApple
 {
 
-    private readonly string _noun;
+    public readonly string Noun;
 
     public RedApple(string noun)
     {
-        _noun = noun;
+        Noun = noun;
     }
 
     public PlayerPawn Owner { get; set; }
@@ -17,5 +17,14 @@ public class RedApple : IRedApple
     public void PlayCard()
     {
         throw new NotImplementedException();
+    }
+    
+    public override bool Equals(object? obj)
+    {
+        if (obj == null || GetType() != obj.GetType())
+            return false;
+
+        RedApple other = (RedApple)obj;
+        return Noun == other.Noun;
     }
 }

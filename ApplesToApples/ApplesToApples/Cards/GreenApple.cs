@@ -9,4 +9,13 @@ public class GreenApple
     {
         Adjective = adjective;
     }
+
+    public override bool Equals(object? obj)
+    {
+        if (obj == null || GetType() != obj.GetType())
+            return false;
+
+        GreenApple other = (GreenApple)obj;
+        return Adjective == other.Adjective;
+    }
 }

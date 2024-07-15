@@ -19,7 +19,7 @@ public class ReplenishPhaseTests
         {
             _pawns.Add(new PlayerPawn());
         }
-        _redApples = Resource.GetRedApples();
+        _redApples = new List<IRedApple>(Resource.GetRedApples());
         _replenishPhase = new ReplenishPhase(_redApples, _pawns);
     }
 

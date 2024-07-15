@@ -8,49 +8,56 @@ namespace ApplesToApples.Game.Variations;
 
 public class StandardGame
 {
-    private PlayerManager _playerManager;
-    public List<IPhase> Phases { get; private set; }
-    private readonly List<IRedApple> _redApples = new List<IRedApple>();
-    private readonly List<GreenApple> _greenApples = new List<GreenApple>();
-    private List<PlayerPawn> _pawns = new List<PlayerPawn>();
-    
-    public StandardGame(int numPlayers)
+    public readonly List<IRedApple> RedApples;
+    public readonly List<GreenApple> GreenApples;
+
+    private readonly IPhaseIterator _iterator;
+    private readonly PlayerManager _playerManager;
+
+    public StandardGame(PlayerManager playerManager)
     {
-        _playerManager = new PlayerManager();
-        
+        _playerManager = playerManager;
+
         // Read all the green apples (adjectives) from a file and add to the green apples deck
-        _greenApples = Resource.GetGreenApples();
-        
+        GreenApples = Resource.GetGreenApples();
+
         // Read all the red apples (nouns) from a file and add to the red apples deck
-        _redApples = Resource.GetRedApples();
-        
+        RedApples = new(Resource.GetRedApples());
+
         // Shuffle both the green apples and red apples decks
-        _greenApples.Shuffle();
-        _redApples.Shuffle();
+        GreenApples.Shuffle();
+        RedApples.Shuffle();
 
+        _iterator = CreatePhases(); // TODO: Redo Standard Game set up, look at creation patterns...
+
+
+    }
+
+    public void Step()
+    {
+        if (_iterator.MoveNext()) _iterator.Current.Execute(); // TODO: Endless loop (we dont check for winner)
+    }
+
+    public IPhaseIterator CreatePhases()
+    {
         // Init phases
-        ReplenishPhase replenishPhase = new ReplenishPhase(_redApples, _playerManager.Pawns);
-        DrawPhase drawPhase = new DrawPhase(_greenApples);
+        ReplenishPhase replenishPhase = new ReplenishPhase(RedApples, _playerManager.Pawns);
+        DrawPhase drawPhase = new DrawPhase(GreenApples);
         SubmitPhase submitPhase = new SubmitPhase(_playerManager.Players);
-        JudgePhase judgePhase = new JudgePhase();
+        JudgePhase judgePhase = new JudgePhase(_playerManager.Players);
 
-        // Set dynamic dependencies with events (observer pattern)
+        // Set dynamic dependencies with events (observer pattern with dependency injection)
         drawPhase.OnDraw += submitPhase.SetGreenApple;
+        drawPhase.OnDraw += judgePhase.SetGreenApple;
         submitPhase.OnCardsSubmitted += judgePhase.SetSubmittedCards;
-        _playerManager.OnJudgeChanged += judgePhase.SetJudge;
-        judgePhase.OnWinnerSelected += redApple =>
-        {
-            redApple.Owner.GreenApples.Add(drawPhase.Current);
-        };
+        judgePhase.OnWinnerSelected += redApple => redApple.Owner.GreenApples.Add(drawPhase.Current);
         
-        
-        Phases = new List<IPhase>
-        {
+        return new PhaseListIterator(new List<IPhase>(){
             replenishPhase,
             drawPhase,
             submitPhase,
             judgePhase
-        };
+        });
     }
 
     public static PlayerPawn? CheckWinner(List<PlayerPawn> players)
