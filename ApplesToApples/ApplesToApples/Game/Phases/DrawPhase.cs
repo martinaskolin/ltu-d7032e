@@ -1,5 +1,4 @@
 using ApplesToApples.Cards;
-using ApplesToApples.Phases;
 using ApplesToApples.Utilities.ExtensionMethods;
 
 namespace ApplesToApples.Game.Phases;

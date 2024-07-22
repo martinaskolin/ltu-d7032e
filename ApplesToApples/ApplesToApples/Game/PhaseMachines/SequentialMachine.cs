@@ -1,14 +1,14 @@
 using ApplesToApples.Game.Phases;
 
-namespace ApplesToApples.Game;
+namespace ApplesToApples.Game.PhaseMachines;
 
-public class PhaseListIterator : IPhaseIterator
+public class SequentialMachine : IPhaseMachine
 {
-    private bool _finished;
+    private int _index = -1;
     private readonly List<IPhase> _phases;
-    private int _index = 0;
+    private bool _finished = false;
 
-    public PhaseListIterator(List<IPhase> phases)
+    public SequentialMachine(List<IPhase> phases)
     {
         _phases = phases;
     }
@@ -24,5 +24,5 @@ public class PhaseListIterator : IPhaseIterator
         _finished = true;
     }
 
-    public IPhase Current => _phases[_index-1];
+    public IPhase Current => _phases[_index];
 }

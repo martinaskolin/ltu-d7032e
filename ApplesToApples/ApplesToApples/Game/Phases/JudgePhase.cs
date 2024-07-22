@@ -5,6 +5,8 @@ namespace ApplesToApples.Game.Phases;
 
 public class JudgePhase : IPhase
 {
+    public IPlayerController CurrentJudge => _controllers[_index];
+
     private readonly List<IPlayerController> _controllers;
     private int _index;
     private List<RedApple>? _submittedCards;
