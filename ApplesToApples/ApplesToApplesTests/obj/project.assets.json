@@ -997,19 +997,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\marti\\.nuget\\packages\\": {}
+    "C:\\Users\\Martin\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\marti\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApplesTests\\ApplesToApplesTests.csproj",
+      "projectUniqueName": "C:\\Users\\Martin\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApplesTests\\ApplesToApplesTests.csproj",
       "projectName": "ApplesToApplesTests",
-      "projectPath": "C:\\Users\\marti\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApplesTests\\ApplesToApplesTests.csproj",
-      "packagesPath": "C:\\Users\\marti\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\marti\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApplesTests\\obj\\",
+      "projectPath": "C:\\Users\\Martin\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApplesTests\\ApplesToApplesTests.csproj",
+      "packagesPath": "C:\\Users\\Martin\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Martin\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApplesTests\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\marti\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Martin\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
@@ -1021,8 +1021,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\Users\\marti\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApples\\ApplesToApples.csproj": {
-              "projectPath": "C:\\Users\\marti\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApples\\ApplesToApples.csproj"
+            "C:\\Users\\Martin\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApples\\ApplesToApples.csproj": {
+              "projectPath": "C:\\Users\\Martin\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApples\\ApplesToApples.csproj"
             }
           }
         }
@@ -1074,7 +1074,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Users\\marti\\.dotnet\\sdk\\7.0.407\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.405\\RuntimeIdentifierGraph.json"
       }
     }
   }

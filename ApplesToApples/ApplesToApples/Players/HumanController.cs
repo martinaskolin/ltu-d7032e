@@ -7,9 +7,9 @@ public class HumanController : IPlayerController
 {
     public PlayerPawn Pawn { get; set; }
     
-    private IServerIO _io;
+    private ClientIO _io;
 
-    public HumanController(IServerIO io)
+    public HumanController(ClientIO io)
     {
         _io = io;
     }
