@@ -18,13 +18,13 @@ public class ReplenishPhase : IPhase
     /// <summary>
     /// Fills up the hand of each player to 7 cards
     /// </summary>
-    public void Execute()
+    public async Task Execute()
     {
         foreach (PlayerPawn pawn in _pawns)
         {
             while (pawn.Hand.Count < 7)
             {
-                pawn.Hand.Add(_redApples.RemoveTop());
+                pawn.GiveRedApple(_redApples.RemoveTop());
             }
         }
     }

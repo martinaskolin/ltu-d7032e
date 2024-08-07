@@ -14,7 +14,7 @@ public class DrawPhase : IPhase
         _drawPile = drawPile;
     }
     
-    public void Execute()
+    public async Task Execute()
     {
         Current = _drawPile.RemoveTop();
         OnDraw?.Invoke(Current);

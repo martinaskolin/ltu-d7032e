@@ -10,15 +10,6 @@ namespace ApplesToApplesTests;
 
 public class RulesTests
 {
-    
-    private StandardGame _game;
-    private PlayerManager _playerManager;
-    
-    [SetUp]
-    public void SetUp()
-    {
-        
-    }
 
     /// <summary>
     /// Tests if the List extension method Shuffle is "random" or not by
@@ -69,21 +60,27 @@ public class RulesTests
     /// </summary>
     private void ReplenishTest()
     {
+        PlayerManager playerManager = new PlayerManager();
+        for (int i = 0; i < 7; i++)
+        {
+            playerManager.AddPlayer(new TestController());
+        }
+        
         // Give each player a different number of cards from 0 to 7
-        for (int i = 0; i < _playerManager.Pawns.Count; i++)
+        for (int i = 0; i < playerManager.Pawns.Count; i++)
         {
             for (int j = 0; j < i; j++)
             {
-                _playerManager.Pawns[i].Hand.Add(new RedApple("Test"));
+                playerManager.Pawns[i].Hand.Add(new RedApple("Test"));
             }
         }
         
         // Execute phase
-        ReplenishPhase phase = new ReplenishPhase(new List<IRedApple>(Resource.GetRedApples()), _playerManager.Pawns);
+        ReplenishPhase phase = new ReplenishPhase(new List<IRedApple>(Resource.GetRedApples()), playerManager.Pawns);
         phase.Execute();
 
         // See if each player ended up with 7 cards
-        foreach (PlayerPawn pawn in _playerManager.Pawns)
+        foreach (PlayerPawn pawn in playerManager.Pawns)
         {
             Assert.That(pawn.Hand.Count, Is.EqualTo(7));
         }
@@ -134,7 +131,7 @@ public class RulesTests
         
         // Set observers
         List<GreenApple> receivedGreenApples = new List<GreenApple>();
-        foreach (var playerController in _playerManager.Players)
+        foreach (var playerController in playerManager.Players)
         {
             var controller = (TestController)playerController;
             controller.OnAskedToPlay += (greenApple) => { receivedGreenApples.Add(greenApple); };
@@ -142,7 +139,7 @@ public class RulesTests
 
         while (receivedGreenApples.Count == 0)
         {
-            _game.Step();
+            game.Step();
         }
 
         Assert.That(receivedGreenApples.Count, Is.EqualTo(playerManager.Players.Count));
@@ -165,8 +162,43 @@ public class RulesTests
     }
 
     [Test]
-    public void Rule15Test()
+    public async Task Rule15Test()
     {
-        //StandardGame.CheckWinner()
+        for (int numPlayers = 4; numPlayers < 9; numPlayers++)
+        {
+            PlayerManager playerManager = new PlayerManager();
+            for (int j = 0; j < numPlayers; j++)
+            {
+                playerManager.AddPlayer(new BotController());
+            }
+        
+            StandardGame game = new StandardGame(playerManager);
+            while (await game.Step()) { }
+
+            CheckIfActuallyWinner(game.Winner.GreenApples.Count, numPlayers);
+        }
+        
+        void CheckIfActuallyWinner(int score, int numPlayers)
+        {
+            switch (numPlayers)
+            {
+                case 4:
+                    Assert.That(score, Is.EqualTo(8));
+                    break;
+                case 5:
+                    Assert.That(score, Is.EqualTo(7));
+                    break;
+                case 6:
+                    Assert.That(score, Is.EqualTo(6));
+                    break;
+                case 7:
+                    Assert.That(score, Is.EqualTo(5));
+                    break;
+                case >=8:
+                    Assert.That(score, Is.EqualTo(4));
+                    break;
+            }
+        }
+        
     }
 }

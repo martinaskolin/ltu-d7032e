@@ -8,11 +8,11 @@ public class BotController : IPlayerController
 
     public Task<RedApple> Play(GreenApple greenApple)
     {
-        throw new NotImplementedException();
+        return Task.FromResult((RedApple)Pawn.Hand[0]); // TODO: change cast before new game variations
     }
 
     public Task<RedApple> Judge(List<RedApple> redApples, GreenApple greenApple)
     {
-        throw new NotImplementedException();
+        return Task.FromResult(redApples[0]);
     }
 }

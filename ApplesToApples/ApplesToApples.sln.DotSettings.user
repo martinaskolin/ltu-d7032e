@@ -2,7 +2,9 @@
 	
 	
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=9d553756_002D1535_002D4472_002D8e8e_002D3314e5642fe2/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="GetRedApplesTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;Project Location="C:\Users\marti\Documents\GitHub\ltu-d7032e\ApplesToApples\ApplesToApplesTests" Presentation="&amp;lt;ApplesToApplesTests&amp;gt;" /&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::4010A7E9-DC91-44A1-A24D-83E3510CA0EC::net7.0::ApplesToApplesTests.RulesTests.Rule15Test&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=ApplesToApples_002FResources_002FResources/@EntryIndexedValue">True</s:Boolean>

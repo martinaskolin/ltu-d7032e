@@ -15,7 +15,7 @@ public class SubmitPhase : IPhase
         _controllers = controllers;
     }
     
-    public async void Execute()
+    public async Task Execute()
     {
         List<RedApple> results = new List<RedApple>();
         List<Task<RedApple>> tasks = new List<Task<RedApple>>();

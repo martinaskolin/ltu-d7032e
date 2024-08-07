@@ -13,7 +13,7 @@ public class CheckWinnerPhase : IPhase
         _players = pawns;
     }
 
-    public void Execute()
+    public async Task Execute()
     {
         PlayerPawn? winner = CheckWinner();
         if (winner != null) OnWinnerFound?.Invoke(winner);
@@ -39,7 +39,7 @@ public class CheckWinnerPhase : IPhase
                 case 7:
                     if (player.GreenApples.Count >= 5) return player;
                     break;
-                default:
+                case >= 8:
                     if (player.GreenApples.Count >= 4) return player;
                     break;
 

@@ -11,6 +11,7 @@ public class StandardGame
 {
     public readonly List<IRedApple> RedApples;
     public readonly List<GreenApple> GreenApples;
+    public PlayerPawn Winner;
 
     private readonly IPhaseMachine _context;
     private readonly PlayerManager _playerManager;
@@ -32,9 +33,12 @@ public class StandardGame
         _context = CreatePhases();
     }
 
-    public void Step()
+    public async Task<bool> Step()
     {
-        if (_context.MoveNext()) _context.Current.Execute(); // TODO: Endless loop (we dont check for winner)
+        bool hasNext = _context.MoveNext();
+        if (hasNext) await _context.Current.Execute();
+        
+        return hasNext;
     }
 
     public IPhaseMachine CreatePhases()
@@ -58,8 +62,11 @@ public class StandardGame
         drawPhase.OnDraw += submitPhase.SetGreenApple;
         drawPhase.OnDraw += judgePhase.SetGreenApple;
         submitPhase.OnCardsSubmitted += judgePhase.SetSubmittedCards;
-        judgePhase.OnWinnerSelected += redApple => redApple.Owner.GreenApples.Add(drawPhase.Current);
+        judgePhase.OnWinnerSelected += redApple => redApple.Owner.GiveGreenApple(drawPhase.Current);
+        judgePhase.OnWinnerSelected += redApple => Console.Write("RedApple Winner:" + redApple.Noun);
         checkWinnerPhase.OnWinnerFound += _ => context.Finished();
+        checkWinnerPhase.OnWinnerFound += winner => Winner = winner;
+        checkWinnerPhase.OnWinnerFound += winner => Console.Write(winner.Id);
 
         return context;
     }

@@ -19,14 +19,14 @@ public class JudgePhase : IPhase
         _controllers = controllers;
     }
     
-    public async void Execute()
+    public async Task Execute()
     {
         IPlayerController judge = _controllers[_index];
         List<RedApple> submittedCards = _submittedCards ?? throw new NullReferenceException("Submitted cards has not been set");
         GreenApple greenApple = _greenApple ?? throw new NullReferenceException("Green apple has not been set");
         
         OnWinnerSelected?.Invoke(await judge.Judge(submittedCards, greenApple));
-        _index++;
+        _index = (_index + 1) % (_controllers.Count - 1);
     }
 
     public void SetSubmittedCards(List<RedApple> submittedCards)
