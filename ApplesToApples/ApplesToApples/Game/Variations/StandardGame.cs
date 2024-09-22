@@ -9,16 +9,22 @@ namespace ApplesToApples.Game.Variations;
 
 public class StandardGame
 {
+    // TODO: Fix judge problem
+    // TODO: Add channels for different players, and all
+    // TODO: Add support for multiplayer
+    
     public readonly List<IRedApple> RedApples;
     public readonly List<GreenApple> GreenApples;
     public PlayerPawn Winner;
 
     private readonly IPhaseMachine _context;
-    private readonly PlayerManager _playerManager;
+    private readonly List<IPlayerController> _controllers;
+    private readonly List<PlayerPawn> _players;
 
-    public StandardGame(PlayerManager playerManager)
+    public StandardGame(List<IPlayerController> controllers)
     {
-        _playerManager = playerManager;
+        _controllers = controllers;
+        _players = controllers.Select(controller => controller.Pawn).ToList();
 
         // Read all the green apples (adjectives) from a file and add to the green apples deck
         GreenApples = Resource.GetGreenApples();
@@ -44,29 +50,29 @@ public class StandardGame
     public IPhaseMachine CreatePhases()
     {
         // Init phases
-        ReplenishPhase replenishPhase = new ReplenishPhase(RedApples, _playerManager.Pawns);
+        ReplenishPhase replenishPhase = new ReplenishPhase(RedApples, _players);
         DrawPhase drawPhase = new DrawPhase(GreenApples);
-        SubmitPhase submitPhase = new SubmitPhase(_playerManager.Players);
-        JudgePhase judgePhase = new JudgePhase(_playerManager.Players);
-        CheckWinnerPhase checkWinnerPhase = new CheckWinnerPhase(_playerManager.Pawns);
+        JudgePhase judgePhase = new JudgePhase(_controllers);
+        SubmitPhase submitPhase = new SubmitPhase(
+            () => _controllers.Where(c => c != judgePhase.CurrentJudge).ToArray(),
+            () => drawPhase.Current);
+        CheckWinnerPhase checkWinnerPhase = new CheckWinnerPhase(_players);
         
-        SequentialMachine context = new SequentialMachine(new List<IPhase>()
+        SequentialMachine context = new SequentialMachine(new List<IGamePhase>()
         {
             replenishPhase,
             drawPhase,
             submitPhase,
-            judgePhase
+            judgePhase,
+            checkWinnerPhase
         });
         
         // Set dynamic dependencies with events (observer pattern with dependency injection)
-        drawPhase.OnDraw += submitPhase.SetGreenApple;
         drawPhase.OnDraw += judgePhase.SetGreenApple;
-        submitPhase.OnCardsSubmitted += judgePhase.SetSubmittedCards;
-        judgePhase.OnWinnerSelected += redApple => redApple.Owner.GiveGreenApple(drawPhase.Current);
-        judgePhase.OnWinnerSelected += redApple => Console.Write("RedApple Winner:" + redApple.Noun);
+        submitPhase.OnSubmissons += judgePhase.SetSubmissions;
         checkWinnerPhase.OnWinnerFound += _ => context.Finished();
         checkWinnerPhase.OnWinnerFound += winner => Winner = winner;
-        checkWinnerPhase.OnWinnerFound += winner => Console.Write(winner.Id);
+        checkWinnerPhase.OnWinnerFound += winner => Console.Write($"{winner.Name} won the game\n");
 
         return context;
     }

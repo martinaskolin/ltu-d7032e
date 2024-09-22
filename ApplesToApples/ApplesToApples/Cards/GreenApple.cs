@@ -18,4 +18,9 @@ public class GreenApple
         GreenApple other = (GreenApple)obj;
         return Adjective == other.Adjective;
     }
+
+    public override string ToString()
+    {
+        return Adjective;
+    }
 }

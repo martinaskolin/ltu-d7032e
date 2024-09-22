@@ -10,9 +10,8 @@ public class RedApple : IRedApple
     public RedApple(string noun)
     {
         Noun = noun;
+        
     }
-
-    public PlayerPawn Owner { get; set; }
 
     public void PlayCard()
     {
@@ -26,5 +25,10 @@ public class RedApple : IRedApple
 
         RedApple other = (RedApple)obj;
         return Noun == other.Noun;
+    }
+
+    public override string ToString()
+    {
+        return Noun;
     }
 }

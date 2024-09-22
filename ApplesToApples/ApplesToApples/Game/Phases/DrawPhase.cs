@@ -3,7 +3,7 @@ using ApplesToApples.Utilities.ExtensionMethods;
 
 namespace ApplesToApples.Game.Phases;
 
-public class DrawPhase : IPhase
+public class DrawPhase : IGamePhase
 {
     public GreenApple Current { get; private set; }
     public event Action<GreenApple>? OnDraw;

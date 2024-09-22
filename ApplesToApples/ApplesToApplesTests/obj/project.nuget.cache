@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "kfvgO1zR4aAKthL4lcS6JffJ/4w9vM70pAw7oN0hkulCf0hgEngjfLg7/tTxPq3EX3X4Uom/jI7C7d7lroH5tQ==",
+  "dgSpecHash": "1Vn7dxcx/wL6z/Wc7JbhVVQ90J0lTBdXlxJvMd3kCicCb7Lf9KJZFYH2wRqIOo8y7X/fgdrUjVXYv2DN0LB7sA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Martin\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApplesTests\\ApplesToApplesTests.csproj",
   "expectedPackageFiles": [
@@ -16,7 +16,10 @@
     "C:\\Users\\Martin\\.nuget\\packages\\nunit\\3.13.3\\nunit.3.13.3.nupkg.sha512",
     "C:\\Users\\Martin\\.nuget\\packages\\nunit.analyzers\\3.6.1\\nunit.analyzers.3.6.1.nupkg.sha512",
     "C:\\Users\\Martin\\.nuget\\packages\\nunit3testadapter\\4.4.2\\nunit3testadapter.4.4.2.nupkg.sha512",
-    "C:\\Users\\Martin\\.nuget\\packages\\system.reflection.metadata\\1.6.0\\system.reflection.metadata.1.6.0.nupkg.sha512"
+    "C:\\Users\\Martin\\.nuget\\packages\\system.reflection.metadata\\1.6.0\\system.reflection.metadata.1.6.0.nupkg.sha512",
+    "C:\\Users\\Martin\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.20\\microsoft.netcore.app.ref.7.0.20.nupkg.sha512",
+    "C:\\Users\\Martin\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.20\\microsoft.windowsdesktop.app.ref.7.0.20.nupkg.sha512",
+    "C:\\Users\\Martin\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.20\\microsoft.aspnetcore.app.ref.7.0.20.nupkg.sha512"
   ],
   "logs": []
 }

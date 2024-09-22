@@ -50,6 +50,27 @@ public abstract class ClientIO
     /// </summary>
     /// <returns>Message read from the IO</returns>
     public abstract Task<string?> ReadAsync();
+
+    public delegate bool TryParseDelegate<TIn, TOut>(TIn input, out TOut result);
+    public async Task<T> ReadAsync<T>(string prefix, TryParseDelegate<string?, T> parser)
+    {
+        bool valid;
+        T value;
+
+        do
+        {
+            Write(prefix);
+            var input = await ReadAsync();
+            valid = parser(input, out value);
+        } while (!valid);
+
+        return value;
+    }
+
+    public async Task<int> ReadAsync(int min, int max, string prefix = "")
+    {
+        return await ReadAsync(prefix, (string? s, out int res) => int.TryParse(s, out res) && min <= res && res < max);
+    }
     
     /// <summary>
     /// Write a message to the IO with a line break at the end.

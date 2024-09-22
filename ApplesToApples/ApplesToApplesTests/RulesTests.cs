@@ -71,7 +71,7 @@ public class RulesTests
         {
             for (int j = 0; j < i; j++)
             {
-                playerManager.Pawns[i].Hand.Add(new RedApple("Test"));
+                playerManager.Pawns[i].GiveCard(new RedApple("Test"));
             }
         }
         
@@ -134,19 +134,19 @@ public class RulesTests
         foreach (var playerController in playerManager.Players)
         {
             var controller = (TestController)playerController;
+            
+            // receivedGreenApples is incremented when a player sees the green apple.
             controller.OnAskedToPlay += (greenApple) => { receivedGreenApples.Add(greenApple); };
         }
 
+        // Step until a green apples is shown to someone
         while (receivedGreenApples.Count == 0)
         {
             game.Step();
         }
 
+        // Assert that it was shown to everyone
         Assert.That(receivedGreenApples.Count, Is.EqualTo(playerManager.Players.Count));
-        foreach (var greenApple in receivedGreenApples)
-        {
-            // TODO: Continue
-        }
     }
 
     [Test]
@@ -175,7 +175,7 @@ public class RulesTests
             StandardGame game = new StandardGame(playerManager);
             while (await game.Step()) { }
 
-            CheckIfActuallyWinner(game.Winner.GreenApples.Count, numPlayers);
+            CheckIfActuallyWinner(game.Winner.Points, numPlayers);
         }
         
         void CheckIfActuallyWinner(int score, int numPlayers)

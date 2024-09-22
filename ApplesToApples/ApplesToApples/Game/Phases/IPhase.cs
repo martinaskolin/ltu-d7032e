@@ -1,6 +1,6 @@
 namespace ApplesToApples.Game.Phases;
 
-public interface IPhase
+public interface IGamePhase
 {
     public Task Execute();
 }

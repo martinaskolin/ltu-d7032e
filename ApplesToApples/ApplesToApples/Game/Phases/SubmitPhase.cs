@@ -3,40 +3,34 @@ using ApplesToApples.Players;
 
 namespace ApplesToApples.Game.Phases;
 
-public class SubmitPhase : IPhase
+public class SubmitPhase : IGamePhase
 {
-    public event Action<List<RedApple>>? OnCardsSubmitted;
+    // Events
+    public event Action<List<(IPlayerController, RedApple)>> OnSubmissons;
 
-    private GreenApple? _greenApple;
-    private readonly List<IPlayerController> _controllers;
+    // Dynamic Variables
+    private Func<IPlayerController[]> FetchSubmitters;
+    private Func<GreenApple> FetchGreenApple;
 
-    public SubmitPhase(List<IPlayerController> controllers)
+    public SubmitPhase(Func<IPlayerController[]> fetchSubmitters, Func<GreenApple> fetchGreenApple)
     {
-        _controllers = controllers;
+        FetchSubmitters = fetchSubmitters;
+        FetchGreenApple = fetchGreenApple;
     }
     
     public async Task Execute()
     {
-        List<RedApple> results = new List<RedApple>();
-        List<Task<RedApple>> tasks = new List<Task<RedApple>>();
-        foreach (IPlayerController controller in _controllers)
-        {
-            tasks.Add(controller.Play(_greenApple ?? throw new NullReferenceException("No green apple has been set")));
-        }
-
-        await Task.WhenAll(tasks.ToArray());
-
-        foreach (Task<RedApple> task in tasks)
-        {
-            results.Add(task.Result);
-        }
+        GreenApple greenApple = FetchGreenApple();
+        List<(IPlayerController, Task<RedApple>)> tasks = new List<(IPlayerController, Task<RedApple>)>();
         
-        OnCardsSubmitted?.Invoke(results);
-    }
+        foreach (IPlayerController controller in FetchSubmitters())
+        {
+            tasks.Add((controller, controller.Play(greenApple)));
+        }
 
-    public void SetGreenApple(GreenApple greenApple)
-    {
-        _greenApple = greenApple;
+        await Task.WhenAll(tasks.Select(tuple => tuple.Item2).ToArray());
+        
+        OnSubmissons?.Invoke(tasks.Select(tuple => (tuple.Item1, tuple.Item2.Result)).ToList());
     }
     
 }

@@ -3,15 +3,19 @@ using ApplesToApples.Players;
 
 namespace ApplesToApples.Game.Phases;
 
-public class JudgePhase : IPhase
+public class JudgePhase : IGamePhase
 {
+    
     public IPlayerController CurrentJudge => _controllers[_index];
 
+    // Judge related
     private readonly List<IPlayerController> _controllers;
     private int _index;
-    private List<RedApple>? _submittedCards;
+    
+    // Verdict related
+    private List<(IPlayerController, RedApple)>? _submissions;
     private GreenApple? _greenApple;
-    public event Action<RedApple>? OnWinnerSelected;
+    
 
     public JudgePhase(List<IPlayerController> controllers)
     {
@@ -22,16 +26,19 @@ public class JudgePhase : IPhase
     public async Task Execute()
     {
         IPlayerController judge = _controllers[_index];
-        List<RedApple> submittedCards = _submittedCards ?? throw new NullReferenceException("Submitted cards has not been set");
-        GreenApple greenApple = _greenApple ?? throw new NullReferenceException("Green apple has not been set");
+        List<(IPlayerController, RedApple)> submissions = _submissions ?? throw new NullReferenceException("No submissions found");
+        GreenApple greenApple = _greenApple ?? throw new NullReferenceException("No green apple found");
+
+        (var winner, var submission) = await judge.Judge(submissions, greenApple); // TODO: Continue
+        winner.Pawn.GivePoint(greenApple);
         
-        OnWinnerSelected?.Invoke(await judge.Judge(submittedCards, greenApple));
+        //OnVerdict?.Invoke(await judge.Judge(submittedCards, greenApple));
         _index = (_index + 1) % (_controllers.Count - 1);
     }
 
-    public void SetSubmittedCards(List<RedApple> submittedCards)
+    public void SetSubmissions(List<(IPlayerController,RedApple)> submissions)
     {
-        _submittedCards = submittedCards;
+        _submissions = submissions;
     }
 
     public void SetGreenApple(GreenApple greenApple)

@@ -2,7 +2,7 @@ using ApplesToApples.Players;
 
 namespace ApplesToApples.Game.Phases;
 
-public class CheckWinnerPhase : IPhase
+public class CheckWinnerPhase : IGamePhase
 {
     public event Action<PlayerPawn> OnWinnerFound;
 
@@ -28,19 +28,19 @@ public class CheckWinnerPhase : IPhase
             switch (_players.Count)
             {
                 case 4:
-                    if (player.GreenApples.Count >= 8) return player;
+                    if (player.Points >= 8) return player;
                     break;
                 case 5:
-                    if (player.GreenApples.Count >= 7) return player;
+                    if (player.Points >= 7) return player;
                     break;
                 case 6:
-                    if (player.GreenApples.Count >= 6) return player;
+                    if (player.Points >= 6) return player;
                     break;
                 case 7:
-                    if (player.GreenApples.Count >= 5) return player;
+                    if (player.Points >= 5) return player;
                     break;
                 case >= 8:
-                    if (player.GreenApples.Count >= 4) return player;
+                    if (player.Points >= 4) return player;
                     break;
 
             }

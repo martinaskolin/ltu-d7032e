@@ -4,15 +4,15 @@ using ApplesToApples.Utilities.ExtensionMethods;
 
 namespace ApplesToApples.Game.Phases;
 
-public class ReplenishPhase : IPhase
+public class ReplenishPhase : IGamePhase
 {
     private readonly List<IRedApple> _redApples;
-    private readonly List<PlayerPawn> _pawns;
+    private readonly List<PlayerPawn> _players;
     
     public ReplenishPhase(List<IRedApple> redApples, List<PlayerPawn> pawns)
     {
         _redApples = redApples;
-        _pawns = pawns;
+        _players = pawns;
     }
     
     /// <summary>
@@ -20,11 +20,11 @@ public class ReplenishPhase : IPhase
     /// </summary>
     public async Task Execute()
     {
-        foreach (PlayerPawn pawn in _pawns)
+        foreach (PlayerPawn player in _players)
         {
-            while (pawn.Hand.Count < 7)
+            while (player.NumberOfCardsInHand < 7)
             {
-                pawn.GiveRedApple(_redApples.RemoveTop());
+                player.GiveCard(_redApples.RemoveTop());
             }
         }
     }

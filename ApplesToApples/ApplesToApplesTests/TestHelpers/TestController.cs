@@ -16,8 +16,8 @@ public class TestController : IPlayerController
         return new Task<RedApple>(() => _testRedApple);
     }
 
-    public Task<RedApple> Judge(List<RedApple> redApples, GreenApple greenApple)
+    public Task<(IPlayerController, RedApple)> Judge(List<(IPlayerController, RedApple)> submissions, GreenApple greenApple)
     {
-        return new Task<RedApple>(() => redApples[IndexToSelect]);
+        return new Task<(IPlayerController, RedApple)>(() => submissions[IndexToSelect % submissions.Count]);
     }
 }
