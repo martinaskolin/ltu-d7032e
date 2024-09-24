@@ -9,17 +9,13 @@ namespace ApplesToApples.Game.Variations;
 
 public class StandardGame
 {
-    // TODO: Fix judge problem
-    // TODO: Add channels for different players, and all
-    // TODO: Add support for multiplayer
-    
-    public readonly List<IRedApple> RedApples;
-    public readonly List<GreenApple> GreenApples;
     public PlayerPawn Winner;
 
     private readonly IPhaseMachine _context;
     private readonly List<IPlayerController> _controllers;
     private readonly List<PlayerPawn> _players;
+    private readonly List<IRedApple> _redApples;
+    private readonly List<GreenApple> _greenApples;
 
     public StandardGame(List<IPlayerController> controllers)
     {
@@ -27,14 +23,14 @@ public class StandardGame
         _players = controllers.Select(controller => controller.Pawn).ToList();
 
         // Read all the green apples (adjectives) from a file and add to the green apples deck
-        GreenApples = Resource.GetGreenApples();
+        _greenApples = Resource.GetGreenApples();
 
         // Read all the red apples (nouns) from a file and add to the red apples deck
-        RedApples = new(Resource.GetRedApples());
+        _redApples = new(Resource.GetRedApples());
 
         // Shuffle both the green apples and red apples decks
-        GreenApples.Shuffle();
-        RedApples.Shuffle();
+        _greenApples.Shuffle();
+        _redApples.Shuffle();
 
         _context = CreatePhases();
     }
@@ -50,8 +46,8 @@ public class StandardGame
     public IPhaseMachine CreatePhases()
     {
         // Init phases
-        ReplenishPhase replenishPhase = new ReplenishPhase(RedApples, _players);
-        DrawPhase drawPhase = new DrawPhase(GreenApples);
+        ReplenishPhase replenishPhase = new ReplenishPhase(_redApples, _players);
+        DrawPhase drawPhase = new DrawPhase(_greenApples);
         JudgePhase judgePhase = new JudgePhase(_controllers);
         SubmitPhase submitPhase = new SubmitPhase(
             () => _controllers.Where(c => c != judgePhase.CurrentJudge).ToArray(),
@@ -72,7 +68,7 @@ public class StandardGame
         submitPhase.OnSubmissons += judgePhase.SetSubmissions;
         checkWinnerPhase.OnWinnerFound += _ => context.Finished();
         checkWinnerPhase.OnWinnerFound += winner => Winner = winner;
-        checkWinnerPhase.OnWinnerFound += winner => Console.Write($"{winner.Name} won the game\n");
+        checkWinnerPhase.OnWinnerFound += winner => GameEventHandler.Broadcast($"{winner.Name} won the game", Channel.All);
 
         return context;
     }

@@ -1,5 +1,8 @@
 namespace ApplesToApples.Cards;
 
+/// <summary>
+/// Green Apple is one of the card types in Apples to Apples.
+/// </summary>
 public class GreenApple
 {
 

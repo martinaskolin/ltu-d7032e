@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Martin\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApplesTests\\ApplesToApplesTests.csproj": {}
+    "C:\\Users\\marti\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApplesTests\\ApplesToApplesTests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Martin\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApplesTests\\ApplesToApplesTests.csproj": {
+    "C:\\Users\\marti\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApplesTests\\ApplesToApplesTests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Martin\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApplesTests\\ApplesToApplesTests.csproj",
+        "projectUniqueName": "C:\\Users\\marti\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApplesTests\\ApplesToApplesTests.csproj",
         "projectName": "ApplesToApplesTests",
-        "projectPath": "C:\\Users\\Martin\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApplesTests\\ApplesToApplesTests.csproj",
-        "packagesPath": "C:\\Users\\Martin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Martin\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApplesTests\\obj\\",
+        "projectPath": "C:\\Users\\marti\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApplesTests\\ApplesToApplesTests.csproj",
+        "packagesPath": "C:\\Users\\marti\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\marti\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApplesTests\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Martin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\marti\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,15 +22,14 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\Martin\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApples\\ApplesToApples.csproj": {
-                "projectPath": "C:\\Users\\Martin\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApples\\ApplesToApples.csproj"
+              "C:\\Users\\marti\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApples\\ApplesToApples.csproj": {
+                "projectPath": "C:\\Users\\marti\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApples\\ApplesToApples.csproj"
               }
             }
           }
@@ -43,11 +38,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -86,61 +76,26 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[7.0.20, 7.0.20]"
-            },
-            {
-              "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
-              "version": "[7.0.20, 7.0.20]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[7.0.20, 7.0.20]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Runtime.win-x64",
-              "version": "[7.0.20, 7.0.20]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[7.0.20, 7.0.20]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Runtime.win-x64",
-              "version": "[7.0.20, 7.0.20]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303\\RuntimeIdentifierGraph.json"
-        }
-      },
-      "runtimes": {
-        "win-x64": {
-          "#import": []
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Martin\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApples\\ApplesToApples.csproj": {
+    "C:\\Users\\marti\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApples\\ApplesToApples.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Martin\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApples\\ApplesToApples.csproj",
+        "projectUniqueName": "C:\\Users\\marti\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApples\\ApplesToApples.csproj",
         "projectName": "ApplesToApples",
-        "projectPath": "C:\\Users\\Martin\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApples\\ApplesToApples.csproj",
-        "packagesPath": "C:\\Users\\Martin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Martin\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApples\\obj\\",
+        "projectPath": "C:\\Users\\marti\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApples\\ApplesToApples.csproj",
+        "packagesPath": "C:\\Users\\marti\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\marti\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApples\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Martin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\marti\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -148,7 +103,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -161,11 +115,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -182,47 +131,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[7.0.20, 7.0.20]"
-            },
-            {
-              "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
-              "version": "[7.0.20, 7.0.20]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[7.0.20, 7.0.20]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[7.0.20, 7.0.20]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Runtime.win-x64",
-              "version": "[7.0.20, 7.0.20]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[7.0.20, 7.0.20]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Runtime.win-x64",
-              "version": "[7.0.20, 7.0.20]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303\\RuntimeIdentifierGraph.json"
-        }
-      },
-      "runtimes": {
-        "win-x64": {
-          "#import": []
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

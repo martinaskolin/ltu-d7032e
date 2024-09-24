@@ -12,11 +12,6 @@ public class RedApple : IRedApple
         Noun = noun;
         
     }
-
-    public void PlayCard()
-    {
-        throw new NotImplementedException();
-    }
     
     public override bool Equals(object? obj)
     {

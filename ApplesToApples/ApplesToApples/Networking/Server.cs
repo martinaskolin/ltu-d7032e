@@ -1,5 +1,6 @@
 using System.Net;
 using System.Net.Sockets;
+using ApplesToApples.Players.IO;
 
 namespace ApplesToApples.Networking;
 
@@ -34,7 +35,7 @@ public class Server
         for (int i = 0; i < numConnections; i++)
         {
             Socket newConnection = await _listener.AcceptSocketAsync();
-            OnUserConnected?.Invoke(new SocketIO(newConnection));
+            OnUserConnected?.Invoke(new ExternalIO(newConnection));
         }
         _listener.Stop();
     }

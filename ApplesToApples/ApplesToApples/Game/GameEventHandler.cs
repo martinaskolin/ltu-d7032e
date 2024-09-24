@@ -5,20 +5,26 @@ namespace ApplesToApples.Game;
 public class GameEventHandler
 {
     
-    private static Dictionary<string, Action<string>> _channels = new Dictionary<string, Action<string>>();
+    private static Dictionary<Channel, Action<string>> _channels = new Dictionary<Channel, Action<string>>();
 
-    public static void Subscribe(string channel, Action<string> subscriber)
+    public static void Subscribe(Channel channel, Action<string> subscriber)
     { 
-        if (!_channels.TryAdd(channel.ToUpper(), subscriber)) _channels[channel.ToUpper()] += subscriber;
+        if (!_channels.TryAdd(channel, subscriber)) _channels[channel] += subscriber;
     }
 
-    public static void Unsubscribe(string channel, Action<string> subscriber)
+    public static void Unsubscribe(Channel channel, Action<string> subscriber)
     {
-        if (_channels.ContainsKey(channel.ToUpper())) _channels[channel.ToUpper()] -= subscriber;
+        if (_channels.ContainsKey(channel)) _channels[channel] -= subscriber;
     }
 
-    public static void Broadcast(string msg, string channel)
+    public static void Broadcast(string msg, Channel channel)
     {
-        _channels[channel.ToUpper()]?.Invoke(msg);
+        _channels[channel]?.Invoke(msg);
     }
+}
+
+public enum Channel
+{
+    All,
+    External
 }

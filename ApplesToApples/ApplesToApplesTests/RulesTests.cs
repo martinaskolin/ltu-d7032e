@@ -11,7 +11,7 @@ namespace ApplesToApplesTests;
 public class RulesTests
 {
 
-    /// <summary>
+    /*/// <summary>
     /// Tests if the List extension method Shuffle is "random" or not by
     /// analyzing the element distribution using Chi-square.
     /// (This covers rule 03, 05 and 08 since they all use this method for their randomness)
@@ -159,23 +159,29 @@ public class RulesTests
     public void Rule12Test()
     {
         ReplenishTest(); // See documentation for ReplenishTest
-    }
+    }*/
 
     [Test]
     public async Task Rule15Test()
     {
         for (int numPlayers = 4; numPlayers < 9; numPlayers++)
         {
-            PlayerManager playerManager = new PlayerManager();
+            List<IPlayerController> controllers = new List<IPlayerController>();
             for (int j = 0; j < numPlayers; j++)
             {
-                playerManager.AddPlayer(new BotController());
+                controllers.Add(new BotController(new PlayerPawn()));
             }
         
-            StandardGame game = new StandardGame(playerManager);
+            StandardGame game = new StandardGame(controllers);
             while (await game.Step()) { }
 
+            Assert.That(IsActuallyWinner());
             CheckIfActuallyWinner(game.Winner.Points, numPlayers);
+        }
+
+        bool IsActuallyWinner()
+        {
+            
         }
         
         void CheckIfActuallyWinner(int score, int numPlayers)

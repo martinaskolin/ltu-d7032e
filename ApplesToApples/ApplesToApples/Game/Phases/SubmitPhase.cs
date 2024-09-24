@@ -1,5 +1,6 @@
 using ApplesToApples.Cards;
 using ApplesToApples.Players;
+using ApplesToApples.Utilities.ExtensionMethods;
 
 namespace ApplesToApples.Game.Phases;
 
@@ -29,8 +30,8 @@ public class SubmitPhase : IGamePhase
         }
 
         await Task.WhenAll(tasks.Select(tuple => tuple.Item2).ToArray());
-        
-        OnSubmissons?.Invoke(tasks.Select(tuple => (tuple.Item1, tuple.Item2.Result)).ToList());
+        OnSubmissons?.Invoke((List<(IPlayerController, RedApple)>)
+            tasks.Select(tuple => (tuple.Item1, tuple.Item2.Result)).ToList().Shuffle());
     }
     
 }

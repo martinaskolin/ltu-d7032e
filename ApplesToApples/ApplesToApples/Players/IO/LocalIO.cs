@@ -1,4 +1,4 @@
-namespace ApplesToApples.Networking;
+namespace ApplesToApples.Players.IO;
 
 public class LocalIO : ClientIO
 {

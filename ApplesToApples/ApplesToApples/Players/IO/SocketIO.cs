@@ -1,7 +1,7 @@
 using System.Net.Sockets;
 using System.Text;
 
-namespace ApplesToApples.Networking;
+namespace ApplesToApples.Players.IO;
 
 public class SocketIO : ClientIO
 {

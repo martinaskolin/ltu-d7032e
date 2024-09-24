@@ -4,6 +4,11 @@ using ApplesToApples.Utilities.ExtensionMethods;
 
 namespace ApplesToApples.Players;
 
+/// <summary>
+/// Represents the player pawn in the game, containing all core player logic
+/// such as cards and points. The <see cref="PlayerPawn"/> is manipulated
+/// by controllers implementing the <see cref="IPlayerController"/> interface.
+/// </summary>
 public class PlayerPawn
 {
     public event Action<IRedApple> OnCardReceived;

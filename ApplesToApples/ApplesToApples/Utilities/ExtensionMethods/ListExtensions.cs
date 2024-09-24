@@ -4,7 +4,7 @@ public static class ListExtensions
 {
     private static readonly Random Rng = new Random();
     
-    public static void Shuffle<T>(this IList<T> list)
+    /*public static void Shuffle<T>(this IList<T> list)
     {
         int n = list.Count;
         while (n > 1)
@@ -13,6 +13,19 @@ public static class ListExtensions
             int k = Rng.Next(n + 1);
             (list[k], list[n]) = (list[n], list[k]);
         }
+    }*/
+    
+    public static IList<T> Shuffle<T>(this IList<T> list)
+    {
+        int n = list.Count;
+        while (n > 1)
+        {
+            n--;
+            int k = Rng.Next(n + 1);
+            (list[k], list[n]) = (list[n], list[k]);
+        }
+
+        return list;
     }
 
     /// <summary>

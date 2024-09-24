@@ -31,3 +31,4 @@ C:\Users\Martin\Documents\GitHub\ltu-d7032e\ApplesToApples\ApplesToApples\obj\De
 C:\Users\Martin\Documents\GitHub\ltu-d7032e\ApplesToApples\ApplesToApples\obj\Debug\net7.0\ApplesToApples.genruntimeconfig.cache
 C:\Users\Martin\Documents\GitHub\ltu-d7032e\ApplesToApples\ApplesToApples\obj\Debug\net7.0\ref\ApplesToApples.dll
 C:\Users\Martin\Documents\GitHub\ltu-d7032e\ApplesToApples\ApplesToApples\obj\Debug\net7.0\ApplesToApples.sourcelink.json
+C:\Users\marti\Documents\GitHub\ltu-d7032e\ApplesToApples\ApplesToApples\obj\Debug\net7.0\ApplesToApples.sourcelink.json
