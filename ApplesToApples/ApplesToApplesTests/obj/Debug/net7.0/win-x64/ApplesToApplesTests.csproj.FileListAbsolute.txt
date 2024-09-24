@@ -1,0 +1,7 @@
+C:\Users\Martin\Documents\GitHub\ltu-d7032e\ApplesToApples\ApplesToApplesTests\bin\Debug\net7.0\win-x64\CoverletSourceRootsMapping
+C:\Users\Martin\Documents\GitHub\ltu-d7032e\ApplesToApples\ApplesToApplesTests\obj\Debug\net7.0\win-x64\ApplesToApplesTests.csproj.AssemblyReference.cache
+C:\Users\Martin\Documents\GitHub\ltu-d7032e\ApplesToApples\ApplesToApplesTests\obj\Debug\net7.0\win-x64\ApplesToApplesTests.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Martin\Documents\GitHub\ltu-d7032e\ApplesToApples\ApplesToApplesTests\obj\Debug\net7.0\win-x64\ApplesToApplesTests.AssemblyInfoInputs.cache
+C:\Users\Martin\Documents\GitHub\ltu-d7032e\ApplesToApples\ApplesToApplesTests\obj\Debug\net7.0\win-x64\ApplesToApplesTests.AssemblyInfo.cs
+C:\Users\Martin\Documents\GitHub\ltu-d7032e\ApplesToApples\ApplesToApplesTests\obj\Debug\net7.0\win-x64\ApplesToApplesTests.csproj.CoreCompileInputs.cache
+C:\Users\Martin\Documents\GitHub\ltu-d7032e\ApplesToApples\ApplesToApplesTests\obj\Debug\net7.0\win-x64\ApplesToApplesTests.sourcelink.json

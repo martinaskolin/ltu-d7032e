@@ -1,25 +1,65 @@
-﻿using ApplesToApples.Game.Variations;
+﻿using ApplesToApples.Game;
+using ApplesToApples.Game.Variations;
 using ApplesToApples.Networking;
 using ApplesToApples.Players;
 using ApplesToApples.Utilities;
 
-//Server server = new Server("localhost", 2048);
 List<IPlayerController> controllers = new List<IPlayerController>();
-controllers.Add(new HumanController(new LocalIO(), new PlayerPawn())); // Add local player
 
-//server.OnUserConnected += io => playerManager.AddPlayer(new HumanController(io)); // Add online players
+LocalIO host = new LocalIO();
+controllers.Add(new HumanController(host, new PlayerPawn()));
+GameEventHandler.Subscribe("ALL", host.WriteLine);
 
-//await server.AcceptConnectionsAsync(IntegerType.FromString(args[0])); // TODO: make robust
-//await server.AcceptConnectionsAsync(1);
-for (int i = 0; i < 6; i++)
+// Host local lobby
+if (args.Length == 0)
 {
-    controllers.Add(new BotController(new PlayerPawn()));
+    while(controllers.Count < 4)
+    {
+        controllers.Add(new BotController(new PlayerPawn()));
+    }
+    
+    StandardGame game = new StandardGame(controllers);
+
+    bool done = false;
+    while (!done)
+    {
+        done = !await game.Step();
+    }
 }
 
-StandardGame game = new StandardGame(controllers);
-
-bool done = false;
-while (!done)
+// Host online lobby
+else if (int.TryParse(args[0], out int numOnlinePlayers))
 {
-    done = !await game.Step();
+    Server server = new Server("localhost", 2048);
+
+    server.OnUserConnected += io =>
+    {
+        controllers.Add(new HumanController(io, new PlayerPawn()));
+        GameEventHandler.Subscribe("ALL", io.WriteLine);
+    };
+    server.OnUserConnected += _ => GameEventHandler.Broadcast("Player connected", "ALL");
+    
+    await server.AcceptConnectionsAsync(numOnlinePlayers);
+    
+    while(controllers.Count < 4)
+    {
+        controllers.Add(new BotController(new PlayerPawn()));
+    }
+    
+    StandardGame game = new StandardGame(controllers);
+
+    bool done = false;
+    while (!done)
+    {
+        done = !await game.Step();
+    }
 }
+
+// Join as a client
+else
+{
+    Client client = new Client();
+    client.Connect(args[0], 2048);
+}
+
+

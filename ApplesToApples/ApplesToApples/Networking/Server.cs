@@ -6,6 +6,9 @@ namespace ApplesToApples.Networking;
 public class Server
 {
     public event Action<ClientIO>? OnUserConnected;
+
+    public static readonly string SendData = "SEND_DATA";
+    public static readonly string CloseConnection = "BYE";
     
     private readonly TcpListener _listener;
     
