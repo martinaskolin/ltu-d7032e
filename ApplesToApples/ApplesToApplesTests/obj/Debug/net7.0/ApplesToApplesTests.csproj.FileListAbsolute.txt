@@ -202,9 +202,10 @@ C:\Users\Martin\Documents\GitHub\ltu-d7032e\ApplesToApples\ApplesToApplesTests\o
 C:\Users\Martin\Documents\GitHub\ltu-d7032e\ApplesToApples\ApplesToApplesTests\obj\Debug\net7.0\ApplesToApplesTests.AssemblyInfoInputs.cache
 C:\Users\Martin\Documents\GitHub\ltu-d7032e\ApplesToApples\ApplesToApplesTests\obj\Debug\net7.0\ApplesToApplesTests.AssemblyInfo.cs
 C:\Users\Martin\Documents\GitHub\ltu-d7032e\ApplesToApples\ApplesToApplesTests\obj\Debug\net7.0\ApplesToApplesTests.csproj.CoreCompileInputs.cache
-C:\Users\Martin\Documents\GitHub\ltu-d7032e\ApplesToApples\ApplesToApplesTests\obj\Debug\net7.0\ApplesToApplesTests.csproj.CopyComplete
 C:\Users\Martin\Documents\GitHub\ltu-d7032e\ApplesToApples\ApplesToApplesTests\obj\Debug\net7.0\ApplesToApplesTests.dll
 C:\Users\Martin\Documents\GitHub\ltu-d7032e\ApplesToApples\ApplesToApplesTests\obj\Debug\net7.0\refint\ApplesToApplesTests.dll
 C:\Users\Martin\Documents\GitHub\ltu-d7032e\ApplesToApples\ApplesToApplesTests\obj\Debug\net7.0\ApplesToApplesTests.pdb
 C:\Users\Martin\Documents\GitHub\ltu-d7032e\ApplesToApples\ApplesToApplesTests\obj\Debug\net7.0\ApplesToApplesTests.genruntimeconfig.cache
 C:\Users\Martin\Documents\GitHub\ltu-d7032e\ApplesToApples\ApplesToApplesTests\obj\Debug\net7.0\ref\ApplesToApplesTests.dll
+C:\Users\Martin\Documents\GitHub\ltu-d7032e\ApplesToApples\ApplesToApplesTests\obj\Debug\net7.0\ApplesToApplesTests.sourcelink.json
+C:\Users\Martin\Documents\GitHub\ltu-d7032e\ApplesToApples\ApplesToApplesTests\obj\Debug\net7.0\ApplesTo.40DEAF8E.Up2Date

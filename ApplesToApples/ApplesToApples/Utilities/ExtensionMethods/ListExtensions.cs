@@ -1,8 +1,10 @@
+using System.Security.Cryptography;
+
 namespace ApplesToApples.Utilities.ExtensionMethods;
 
 public static class ListExtensions
 {
-    private static readonly Random Rng = new Random();
+    //private static readonly Random Rng = new Random();
     
     /*public static void Shuffle<T>(this IList<T> list)
     {
@@ -21,11 +23,18 @@ public static class ListExtensions
         while (n > 1)
         {
             n--;
-            int k = Rng.Next(n + 1);
+            int k = GetRandomNumber(n + 1);
             (list[k], list[n]) = (list[n], list[k]);
         }
 
         return list;
+        
+        int GetRandomNumber(int maxExclusive)
+        {
+            byte[] randomNumber = new byte[4];
+            RandomNumberGenerator.Fill(randomNumber);
+            return Math.Abs(BitConverter.ToInt32(randomNumber, 0)) % maxExclusive;
+        }
     }
 
     /// <summary>

@@ -19,7 +19,14 @@ public class GameEventHandler
 
     public static void Broadcast(string msg, Channel channel)
     {
-        _channels[channel]?.Invoke(msg);
+        try
+        {
+            _channels[channel]?.Invoke(msg);
+        }
+        catch
+        {
+            // ignored
+        }
     }
 }
 

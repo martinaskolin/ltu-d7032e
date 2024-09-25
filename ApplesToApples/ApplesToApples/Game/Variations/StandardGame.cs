@@ -9,7 +9,7 @@ namespace ApplesToApples.Game.Variations;
 
 public class StandardGame
 {
-    public PlayerPawn Winner;
+    public PlayerPawn? Winner;
     public int NumberOfPlayers => _players.Count;
 
     private readonly IPhaseMachine _context;
@@ -28,12 +28,13 @@ public class StandardGame
 
         // Read all the red apples (nouns) from a file and add to the red apples deck
         _redApples = new(Resource.GetRedApples());
-
+        
         // Shuffle both the green apples and red apples decks
         _greenApples.Shuffle();
         _redApples.Shuffle();
 
         _context = CreatePhases();
+
     }
 
     public async Task<bool> Step()
@@ -67,6 +68,7 @@ public class StandardGame
         // Set dynamic dependencies with events (observer pattern with dependency injection)
         drawPhase.OnDraw += judgePhase.SetGreenApple;
         submitPhase.OnSubmissons += judgePhase.SetSubmissions;
+        judgePhase.OnVerdict += (winner, _, greenApple) => winner.Pawn.GivePoint(greenApple);
         checkWinnerPhase.OnWinnerFound += _ => context.Finished();
         checkWinnerPhase.OnWinnerFound += winner => Winner = winner;
         checkWinnerPhase.OnWinnerFound += winner => GameEventHandler.Broadcast($"{winner.Name} won the game", Channel.All);

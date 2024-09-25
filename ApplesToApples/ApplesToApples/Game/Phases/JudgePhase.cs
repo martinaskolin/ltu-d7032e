@@ -5,7 +5,8 @@ namespace ApplesToApples.Game.Phases;
 
 public class JudgePhase : IGamePhase
 {
-    public event Action<IPlayerController> OnNewJudge; 
+    public event Action<IPlayerController> OnNewJudge;
+    public event Action<IPlayerController, RedApple, GreenApple> OnVerdict; 
     
     public IPlayerController CurrentJudge => _controllers[_index];
 
@@ -31,10 +32,9 @@ public class JudgePhase : IGamePhase
         List<(IPlayerController, RedApple)> submissions = _submissions ?? throw new NullReferenceException("No submissions found");
         GreenApple greenApple = _greenApple ?? throw new NullReferenceException("No green apple found");
 
-        (var winner, var submission) = await judge.Judge(submissions, greenApple); // TODO: Continue
-        winner.Pawn.GivePoint(greenApple);
+        (var winner, var submission) = await judge.Judge(submissions, greenApple);
         
-        //OnVerdict?.Invoke(await judge.Judge(submittedCards, greenApple));
+        OnVerdict?.Invoke(winner, submission, greenApple);
         _index = (_index + 1) % (_controllers.Count - 1);
     }
 
