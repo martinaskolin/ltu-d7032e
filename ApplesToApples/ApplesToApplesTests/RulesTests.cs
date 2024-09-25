@@ -162,29 +162,44 @@ public class RulesTests
     }*/
 
     [Test]
+    public void Rule13Test()
+    {
+        // Rule 13: The next player in the list becomes the judge. Repeat from step 6 until someone wins the game.
+        List<IPlayerController> controllers = new List<IPlayerController>();
+        while (controllers.Count < 4)
+        {
+            controllers.Add(new TestController());
+        }
+    }
+
+    // ----------------------------------------------------------
+    // Winning the game
+    // ----------------------------------------------------------
+    
+    [Test]
+    public void Rule14Test()
+    {
+        // Rule 14: Keep score by keeping the green apples you’ve won.
+        
+        PlayerPawn player = new PlayerPawn();
+        for (int i = 0; i < 10; i++)
+        {
+            player.GivePoint(new GreenApple(""));
+            Assert.That(player.Points, Is.EqualTo(i));
+        }
+    }
+
+    [Test]
     public async Task Rule15Test()
     {
-        for (int numPlayers = 4; numPlayers < 9; numPlayers++)
-        {
-            List<IPlayerController> controllers = new List<IPlayerController>();
-            for (int j = 0; j < numPlayers; j++)
-            {
-                controllers.Add(new BotController(new PlayerPawn()));
-            }
+        // Here’s how to tell when the game is over:
+        //    • For 4 players, 8 green apples win.
+        //    • For 5 players, 7 green apples win.
+        //    • For 6 players, 6 green apples win.
+        //    • For 7 players, 5 green apples win.
+        //    • For 8+ players, 4 green apples win.
         
-            StandardGame game = new StandardGame(controllers);
-            while (await game.Step()) { }
-
-            Assert.That(IsActuallyWinner());
-            CheckIfActuallyWinner(game.Winner.Points, numPlayers);
-        }
-
-        bool IsActuallyWinner()
-        {
-            
-        }
-        
-        void CheckIfActuallyWinner(int score, int numPlayers)
+        void AssertWinner(int score, int numPlayers)
         {
             switch (numPlayers)
             {
@@ -205,6 +220,22 @@ public class RulesTests
                     break;
             }
         }
+        
+        for (int numPlayers = 4; numPlayers < 9; numPlayers++)
+        {
+            List<IPlayerController> controllers = new List<IPlayerController>();
+            for (int j = 0; j < numPlayers; j++)
+            {
+                controllers.Add(new BotController(new PlayerPawn()));
+            }
+        
+            StandardGame game = new StandardGame(controllers);
+            while (await game.Step()) { }
+
+            AssertWinner(game.Winner.Points, game.NumberOfPlayers);
+        }
+        
+        
         
     }
 }

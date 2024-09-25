@@ -10,6 +10,7 @@ namespace ApplesToApples.Game.Variations;
 public class StandardGame
 {
     public PlayerPawn Winner;
+    public int NumberOfPlayers => _players.Count;
 
     private readonly IPhaseMachine _context;
     private readonly List<IPlayerController> _controllers;
@@ -52,7 +53,7 @@ public class StandardGame
         SubmitPhase submitPhase = new SubmitPhase(
             () => _controllers.Where(c => c != judgePhase.CurrentJudge).ToArray(),
             () => drawPhase.Current);
-        CheckWinnerPhase checkWinnerPhase = new CheckWinnerPhase(_players);
+        CheckWinnerPhase checkWinnerPhase = new CheckWinnerPhase(_players, IsWinner);
         
         SequentialMachine context = new SequentialMachine(new List<IGamePhase>()
         {
@@ -71,5 +72,32 @@ public class StandardGame
         checkWinnerPhase.OnWinnerFound += winner => GameEventHandler.Broadcast($"{winner.Name} won the game", Channel.All);
 
         return context;
+    }
+
+    public static bool IsWinner(PlayerPawn player, int numPlayers)
+    {
+        switch (numPlayers)
+        {
+            case 4:
+                if (player.Points >= 8) return true;
+                break;
+            case 5:
+                if (player.Points >= 7) return true;
+                break;
+            case 6:
+                if (player.Points >= 6) return true;
+                break;
+            case 7:
+                if (player.Points >= 5) return true;
+                break;
+            case >= 8:
+                if (player.Points >= 4) return true;
+                break;
+            default:
+                throw new ArgumentException($"{numPlayers} player(s) are not enough to play this game variation.");
+
+        }
+
+        return false;
     }
 }
