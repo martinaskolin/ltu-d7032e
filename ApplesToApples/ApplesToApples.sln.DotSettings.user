@@ -1,29 +1,11 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/Highlighting/HighlightingSourceSnapshotLocation/@EntryValue">C:\Users\marti\AppData\Local\JetBrains\Rider2024.1\resharper-host\temp\Rider\vAny\CoverageData\_ApplesToApples.-1188230634\Snapshot\snapshot.utdcvr</s:String>
 	
 	
 	
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=9d553756_002D1535_002D4472_002D8e8e_002D3314e5642fe2/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="GetRedApplesTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::4010A7E9-DC91-44A1-A24D-83E3510CA0EC::net7.0::ApplesToApplesTests.RulesTests.Rule15Test&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::4010A7E9-DC91-44A1-A24D-83E3510CA0EC::net7.0::ApplesToApplesTests.RulesTests.Rule01Test&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::4010A7E9-DC91-44A1-A24D-83E3510CA0EC::net7.0::ApplesToApplesTests.RulesTests.Rule02Test&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::4010A7E9-DC91-44A1-A24D-83E3510CA0EC::net7.0::ApplesToApplesTests.RulesTests.Rule03Test&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::4010A7E9-DC91-44A1-A24D-83E3510CA0EC::net7.0::ApplesToApplesTests.RulesTests.Rule04Test&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::4010A7E9-DC91-44A1-A24D-83E3510CA0EC::net7.0::ApplesToApplesTests.RulesTests.Rule05Test&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::4010A7E9-DC91-44A1-A24D-83E3510CA0EC::net7.0::ApplesToApplesTests.RulesTests.Rule06Test&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::4010A7E9-DC91-44A1-A24D-83E3510CA0EC::net7.0::ApplesToApplesTests.RulesTests.Rule07Test&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
-&lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=dc0d9a03_002D617a_002D4ebb_002Da1e3_002Daaace2bf585a/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Rule08Test" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::4010A7E9-DC91-44A1-A24D-83E3510CA0EC::net7.0::ApplesToApplesTests.RulesTests&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
-&lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=dde9aade_002Dec65_002D40ba_002Daa78_002D9635b1a1eb16/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Rule07Test" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::4010A7E9-DC91-44A1-A24D-83E3510CA0EC::net7.0::ApplesToApplesTests.RulesTests&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
-&lt;/SessionState&gt;</s:String>
+	
+	
+	
 	
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=ApplesToApples_002FResources_002FResources/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/Initialized/@EntryValue">True</s:Boolean></wpf:ResourceDictionary>

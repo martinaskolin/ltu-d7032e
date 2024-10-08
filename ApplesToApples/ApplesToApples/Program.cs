@@ -3,7 +3,6 @@ using ApplesToApples.Game.Variations;
 using ApplesToApples.Networking;
 using ApplesToApples.Players;
 using ApplesToApples.Players.IO;
-using ApplesToApples.Utilities;
 
 List<IPlayerController> controllers = new List<IPlayerController>();
 

@@ -1,13 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "z3Zg83n2fDU=",
+  "dgSpecHash": "WR1ddisnK9An272SNtje0LoFdhiTgedBCVZw9c8tMRkhvlATfTIIwmcu/zoV7+1CEfu9FAhSbOK+hWKxmkf42g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Martin\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApples\\ApplesToApples.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\Martin\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.20\\microsoft.netcore.app.ref.7.0.20.nupkg.sha512",
-    "C:\\Users\\Martin\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.20\\microsoft.windowsdesktop.app.ref.7.0.20.nupkg.sha512",
-    "C:\\Users\\Martin\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.20\\microsoft.aspnetcore.app.ref.7.0.20.nupkg.sha512",
-    "C:\\Users\\Martin\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\7.0.20\\microsoft.netcore.app.host.win-x64.7.0.20.nupkg.sha512"
-  ],
+  "projectFilePath": "C:\\Users\\marti\\Documents\\GitHub\\ltu-d7032e\\ApplesToApples\\ApplesToApples\\ApplesToApples.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }

@@ -48,7 +48,43 @@ public class RulesTests
     public void Rule05Test()
     {
         // Rule 05: Randomise which player starts being the judge.
-        // TODO: CONTINUE!!!!!
+        List<IPlayerController> controllers =
+            new List<IPlayerController>(Enumerable.Range(0, 6).Select(_ => new TestController()).ToList());
+
+        List<IPlayerController> judges = new List<IPlayerController>();
+        for (int i = 0; i < 100; i++)
+        {
+            judges.Add(new JudgePhase(controllers).CurrentJudge);
+        }
+        
+        foreach (var controller in controllers)
+        {
+            Assert.That(judges, Does.Contain(controller), 
+                "Each player should be selected as judge at least once.");
+        }
+
+        // 2. Assert that the selection is roughly uniform
+        var judgeGroups = judges.GroupBy(j => j).Select(group => new 
+        {
+            Judge = group.Key,
+            Count = group.Count()
+        }).ToList();
+
+        // Calculate expected frequency: each player should be judge ~ (iterations / number of players)
+        double expectedFrequency = 100 / (double)controllers.Count;
+    
+        // Chi-square test to verify randomness (similar to the shuffle test)
+        double chiSquare = 0;
+        foreach (var group in judgeGroups)
+        {
+            double observed = group.Count;
+            chiSquare += Math.Pow(observed - expectedFrequency, 2) / expectedFrequency;
+        }
+
+        // Chi-square critical value for p = 0.05 (95% confidence) and df = 5 (6 players - 1)
+        double criticalValue = 11.070;  // This is the critical value for df = 5 at p = 0.05
+
+        Assert.Less(chiSquare, criticalValue, "Judge selection does not appear to be random.");
     }
     
     // ----------------------------------------------------------
