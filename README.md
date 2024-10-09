@@ -26,7 +26,7 @@ Home Exam in D7032 at LTU. Apples to Apples is a party card game that revolves a
 
 2. Run the game as a client
     ```sh
-    .\ApplesToApples\ApplesToApples\bin\Release\net7.0\win-x64\ApplesToApples.exe [ipaddress (localhost)]
+    .\ApplesToApples\ApplesToApples\bin\Release\net7.0\win-x64\ApplesToApples.exe [IP Address (localhost)]
     ```
 
 ## Running Tests
