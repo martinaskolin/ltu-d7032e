@@ -1,7 +1,7 @@
 # Apples To Apples
 
 ## Description
-A brief description of your project.
+Home Exam in D7032 at LTU. Apples to Apples is a party card game that revolves around humor and subjective matching.
 
 ## Requirements
 - .NET 7.0 SDK
