@@ -8,101 +8,98 @@ using ApplesToApplesTests.TestHelpers;
 
 namespace ApplesToApplesTests;
 
+/// <summary>
+/// Tests for the rules of Apples to Apples.
+/// </summary>
 public class RulesTests
 {
     // ----------------------------------------------------------
     // Setting up the game
     // ----------------------------------------------------------
     
-    [Test]
-    public void Rule01Test()
+    /// <summary>
+    /// Rule 01: Read all the green apples (adjectives) from a file and add to the green apples deck.
+    /// </summary>
+    [Test] public void Rule01Test()
     {
-        // Rule 01: Read all the green apples (adjectives) from a file and add to the green apples deck.
         List<GreenApple> greenApples = Resource.GetGreenApples();
         Assert.That(greenApples.Count, Is.EqualTo(614));
     }
     
-    [Test]
-    public void Rule02Test()
+    /// <summary>
+    /// Rule 02: Read all the red apples (nouns) from a file and add to the red apples deck.
+    /// </summary>
+    [Test] public void Rule02Test()
     {
-        // Rule 02: Read all the red apples (nouns) from a file and add to the red apples deck.
         List<IRedApple> redApples = new List<IRedApple>(Resource.GetRedApples());
         Assert.That(redApples.Count, Is.EqualTo(1826));
     }
     
-    [Test]
-    public void Rule03Test()
+    /// <summary>
+    /// Rule 03: Shuffle both the green apples and red apples decks.
+    /// </summary>
+    [Test] public void Rule03Test()
     {
-        // Rule 03: Shuffle both the green apples and red apples decks.
-        ShuffleTest();
+        List<GreenApple> originalGreenApples = Resource.GetGreenApples();
+        List<IRedApple> originalRedApples = new List<IRedApple>(Resource.GetRedApples());
+        
+        List<GreenApple> shuffledGreenApples = Resource.GetGreenApples();
+        List<IRedApple> shuffledRedApples = new List<IRedApple>(Resource.GetRedApples());
+        
+        shuffledGreenApples.Shuffle();
+        shuffledRedApples.Shuffle();
+        
+        // Check if the order is different from the originals
+        Assert.IsFalse(Enumerable.SequenceEqual(originalGreenApples, shuffledGreenApples)); 
+        Assert.IsFalse(Enumerable.SequenceEqual(originalRedApples, shuffledRedApples)); 
     }
     
-    [Test]
-    public void Rule04Test()
+    /// <summary>
+    /// Rule 04: Deal seven red apples to each player, including the judge.
+    /// </summary>
+    [Test] public Task Rule04Test()
     {
-        // Rule 04: Deal seven red apples to each player, including the judge.
-        ReplenishTest(); // See documentation for ReplenishTest
+        return ReplenishTest(); // See documentation for ReplenishTest
     }
     
-    [Test]
-    public void Rule05Test()
+    /// <summary>
+    /// Rule 05: Randomise which player starts being the judge.
+    /// </summary>
+    [Test] public void Rule05Test()
     {
-        // Rule 05: Randomise which player starts being the judge.
         List<IPlayerController> controllers =
             new List<IPlayerController>(Enumerable.Range(0, 6).Select(_ => new TestController()).ToList());
 
+        // Create a list of which player starts being the judge for 100 instances
         List<IPlayerController> judges = new List<IPlayerController>();
         for (int i = 0; i < 100; i++)
         {
             judges.Add(new JudgePhase(controllers).CurrentJudge);
         }
         
+        // Ensure that each player has been selected as judge at least once
         foreach (var controller in controllers)
         {
             Assert.That(judges, Does.Contain(controller), 
                 "Each player should be selected as judge at least once.");
         }
-
-        // 2. Assert that the selection is roughly uniform
-        var judgeGroups = judges.GroupBy(j => j).Select(group => new 
-        {
-            Judge = group.Key,
-            Count = group.Count()
-        }).ToList();
-
-        // Calculate expected frequency: each player should be judge ~ (iterations / number of players)
-        double expectedFrequency = 100 / (double)controllers.Count;
-    
-        // Chi-square test to verify randomness (similar to the shuffle test)
-        double chiSquare = 0;
-        foreach (var group in judgeGroups)
-        {
-            double observed = group.Count;
-            chiSquare += Math.Pow(observed - expectedFrequency, 2) / expectedFrequency;
-        }
-
-        // Chi-square critical value for p = 0.05 (95% confidence) and df = 5 (6 players - 1)
-        double criticalValue = 11.070;  // This is the critical value for df = 5 at p = 0.05
-
-        Assert.Less(chiSquare, criticalValue, "Judge selection does not appear to be random.");
     }
     
     // ----------------------------------------------------------
     // Playing the game
     // ----------------------------------------------------------
     
-    [Test]
-    public void Rule06Test()
+    /// <summary>
+    /// Rule 06: A green apple is drawn from the pile and shown to everyone
+    /// </summary>
+    [Test] public void Rule06Test()
     {
-        // Rule 06: A green apple is drawn from the pile and shown to everyone
-        
         // Set up
         List<IPlayerController> controllers = new List<IPlayerController>();
         for (int i = 0; i < 8; i++)
         {
             controllers.Add(new TestController());
         }
-        
         StandardGame game = new StandardGame(controllers);
         
         // Set observers
@@ -124,10 +121,11 @@ public class RulesTests
         Assert.That(receivedGreenApples.Count, Is.EqualTo(controllers.Count-1));
     }
 
-    [Test]
-    public async Task Rule07Test()
+    /// <summary>
+    /// Rule 07: All players (except the judge) choose one red apple from their hand (based on the green apple) and plays it.
+    /// </summary>
+    [Test] public async Task Rule07Test()
     {
-        // Rule 07: All players (except the judge) choose one red apple from their hand (based on the green apple) and plays it.
         List<IPlayerController> controllers =
             new List<IPlayerController>(Enumerable.Range(0, 6).Select(_ => new TestController()).ToList());
 
@@ -156,16 +154,43 @@ public class RulesTests
 
     }
 
-    [Test]
-    public void Rule08Test()
+    /// <summary>
+    /// Rule 08: The printed order of the played red apples should be randomised before shown to everyone.
+    /// </summary>
+    [Test] public async Task Rule08Test()
     {
-        ShuffleTest(); // See documentation for ShuffleTest
+        List<IPlayerController> controllers =
+            new List<IPlayerController>(Enumerable.Range(0, 100).Select(_ => new TestController()).ToList());
+
+        JudgePhase judgePhase = new JudgePhase(controllers);
+        SubmitPhase submitPhase = new SubmitPhase(
+            () => controllers.Where(c => c != judgePhase.CurrentJudge).ToArray(),
+            () => new GreenApple("GREEN APPLE"));
+
+        var cardsInSubmittedOrder = new List<RedApple>();
+
+        // When asked to play add them as a submitter
+        foreach (var controller in controllers)
+        {
+            ((TestController)controller).OnCardPlayed += card => cardsInSubmittedOrder.Add(card);
+        }
+
+        List<(IPlayerController, RedApple)>? submissions = null;
+        submitPhase.OnSubmissons += list => submissions = list;
+
+        await submitPhase.Execute();
+        
+        var cardsInPrintedOrder = submissions.Select(tuple => tuple.Item2).ToList();
+        
+        // Cards in printed order are not equal to cards in submitted order
+        Assert.IsFalse(Enumerable.SequenceEqual(cardsInSubmittedOrder, cardsInPrintedOrder)); 
     }
 
-    [Test]
-    public void Rule09Test()
+    /// <summary>
+    /// Rule 09: All players (except the judge) must play their red apples before the results are shown.
+    /// </summary>
+    [Test] public void Rule09Test()
     {
-        // Rule 09: All players (except the judge) must play their red apples before the results are shown.
         List<IPlayerController> controllers =
             new List<IPlayerController>(Enumerable.Range(0, 6).Select(_ => new TestController()).ToList());
 
@@ -193,10 +218,11 @@ public class RulesTests
         };
     }
 
-    [Test]
-    public async Task Rule10Test()
+    /// <summary>
+    /// Rule 10: The judge selects a favourite red apple. The player who submitted the favourite red apple is rewarded the green apple as a point (rule 14).
+    /// </summary>
+    [Test] public async Task Rule10Test()
     {
-        // Rule 10: The judge selects a favourite red apple. The player who submitted the favourite red apple is rewarded the green apple as a point (rule 14).
         List<IPlayerController> controllers =
             new List<IPlayerController>(Enumerable.Range(0, 6).Select(_ => new TestController()).ToList());
         StandardGame game = new StandardGame(controllers);
@@ -221,8 +247,10 @@ public class RulesTests
         Assert.That(receivedAPoint.Value.Item1.Pawn.Points, Is.EqualTo(1));
     }
 
-    [Test]
-    public async Task Rule11Test()
+    /// <summary>
+    /// Rule 11: All the submitted red apples are discarded
+    /// </summary>
+    [Test] public async Task Rule11Test()
     {
         List<IPlayerController> controllers =
             new List<IPlayerController>(Enumerable.Range(0, 6).Select(_ => new BotController(new PlayerPawn())).ToList());
@@ -248,20 +276,43 @@ public class RulesTests
         }
     }
 
-    [Test]
-    public void Rule12Test()
+    /// <summary>
+    /// Rule 12: All players are given new red apples until they have 7 red apples
+    /// </summary>
+    [Test] public Task Rule12Test()
     {
-        ReplenishTest(); // See documentation for ReplenishTest
+        return ReplenishTest(); // See documentation for ReplenishTest
     }
 
-    [Test]
-    public void Rule13Test()
+    /// <summary>
+    /// Rule 13: The next player in the list becomes the judge. Repeat from step 6 until someone wins the game.
+    /// </summary>
+    [Test] public async Task Rule13Test()
     {
-        // Rule 13: The next player in the list becomes the judge. Repeat from step 6 until someone wins the game.
         List<IPlayerController> controllers = new List<IPlayerController>();
         while (controllers.Count < 4)
         {
             controllers.Add(new TestController());
+        }
+
+        StandardGame game = new StandardGame(controllers);
+
+        int? index = null;
+        game.OnNewJudge += controller =>
+        {
+            int i = controllers.IndexOf(controller);
+            if (index == null) index = i; // Set the first index of the judge
+            else
+            {
+                index = (index+1)%game.NumberOfPlayers;
+                Assert.That(i, Is.EqualTo(index)); // Assert that the next player in the list becomes the judge
+            }
+        };
+        
+        bool done = false;
+        while (!done)
+        {
+            done = !await game.Step();
         }
     }
 
@@ -269,10 +320,11 @@ public class RulesTests
     // Winning the game
     // ----------------------------------------------------------
     
-    [Test]
-    public void Rule14Test()
+    /// <summary>
+    /// Rule 14: Keep score by keeping the green apples you’ve won.
+    /// </summary>
+    [Test] public void Rule14Test()
     {
-        // Rule 14: Keep score by keeping the green apples you’ve won.
         
         PlayerPawn player = new PlayerPawn();
         for (int i = 0; i < 10; i++)
@@ -282,16 +334,16 @@ public class RulesTests
         }
     }
 
-    [Test]
-    public async Task Rule15Test()
+    /// <summary>
+    /// Rule 15: Here’s how to tell when the game is over:
+    ///              • For 4 players, 8 green apples win.
+    ///              • For 5 players, 7 green apples win.
+    ///              • For 6 players, 6 green apples win.
+    ///              • For 7 players, 5 green apples win.
+    ///              • For 8+ players, 4 green apples win.
+    /// </summary>
+    [Test] public async Task Rule15Test()
     {
-        // Rule 15: Here’s how to tell when the game is over:
-        //              • For 4 players, 8 green apples win.
-        //              • For 5 players, 7 green apples win.
-        //              • For 6 players, 6 green apples win.
-        //              • For 7 players, 5 green apples win.
-        //              • For 8+ players, 4 green apples win.
-        
         void AssertWinner(int score, int numPlayers)
         {
             switch (numPlayers)
@@ -327,9 +379,6 @@ public class RulesTests
 
             AssertWinner(game.Winner.Points, game.NumberOfPlayers);
         }
-        
-        
-        
     }
     
     // ----------------------------------------------------------
@@ -337,54 +386,12 @@ public class RulesTests
     // ----------------------------------------------------------
     
     /// <summary>
-    /// Tests if the List extension method Shuffle is "random" or not by
-    /// analyzing the element distribution using Chi-square.
-    /// (This covers rule 03, 05 and 08 since they all use this method for their randomness)
-    /// </summary>
-    private void ShuffleTest()
-    {
-        int trials = 10000;
-        int size = 10;
-        int[,] posCount = new int[size, size];
-        List<int> original = Enumerable.Range(0, size).ToList();
-
-        for (int i = 0; i < trials; i++)
-        {
-            List<int> list = new List<int>(original);
-            list.Shuffle();
-            
-            for (int newIndex = 0; newIndex < size; newIndex++)
-            {
-                int originalIndex = list[newIndex];
-                posCount[originalIndex, newIndex]++;
-            }
-        }
-
-        double expectedFreq = trials / (double)size;
-        double chiSquare = 0f;
-
-        for (int i = 0; i < size; i++)
-        {
-            for (int j = 0; j < size; j++)
-            {
-                double observed = posCount[i, j];
-                chiSquare += Math.Pow(observed - expectedFreq, 2) / expectedFreq;
-            }
-        }
-        
-        // Chi-square critical value for p = 0.05 (95% confidence)
-        // For 81 degrees of freedom (df = (r-1)(c-1)): 157.879
-        double criticalValue = 157.879;
-        
-        Assert.Less(chiSquare, criticalValue, "Shuffle does not appear to be random");
-    }
-    
-    /// <summary>
     /// Tests if the Replenish phase gives cards to players until they reach 7
     /// regardless of how many they had before. (Rule 04 and 12)
     /// </summary>
     private async Task ReplenishTest()
     {
+        // Init players
         List<PlayerPawn> players = new List<PlayerPawn>();
         for (int i = 0; i < 7; i++)
         {

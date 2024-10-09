@@ -4,9 +4,14 @@ using ApplesToApples.Utilities.ExtensionMethods;
 
 namespace ApplesToApples.Game.Phases;
 
+/// <summary>
+/// Phase where players submit their red apple cards based on the green apple card.
+/// </summary>
 public class SubmitPhase : IGamePhase
 {
-    // Events
+    /// <summary>
+    /// Invoked when all players have submitted their red apple cards. Order of the list is random.
+    /// </summary>
     public event Action<List<(IPlayerController, RedApple)>> OnSubmissons;
 
     // Dynamic Variables

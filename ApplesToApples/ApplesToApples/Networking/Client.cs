@@ -4,9 +4,15 @@ using ApplesToApples.Players.IO;
 
 namespace ApplesToApples.Networking;
 
+/// <summary>
+/// Simple client class that connects to a server and sends and receives messages.
+/// </summary>
 public class Client
 {
 
+    /// <summary>
+    /// Connects to a server at the given address and port.
+    /// </summary>
     public void Connect(string address, int port)
     {
         IPAddress ipAddress = Dns.GetHostEntry(address).AddressList[0];

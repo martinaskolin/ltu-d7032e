@@ -1,5 +1,8 @@
 namespace ApplesToApples.Players.IO;
 
+/// <summary>
+/// Abstract class for handling input and output (IO) for a client.
+/// </summary>
 public abstract class ClientIO
 {
     /// <summary>
@@ -18,10 +21,11 @@ public abstract class ClientIO
     /// Read a message from the IO (Asynchronous).
     /// </summary>
     /// <returns>Message read from the IO</returns>
-    public abstract Task<string?> ReadAsync();
+    protected abstract Task<string?> ReadAsync();
 
-    public delegate bool TryParseDelegate<TIn, TOut>(TIn input, out TOut result);
-    public async Task<T> ReadAsync<T>(TryParseDelegate<string?, T> parser, string prefix)
+    private delegate bool TryParseDelegate<TIn, TOut>(TIn input, out TOut result);
+
+    private async Task<T> ReadAsync<T>(TryParseDelegate<string?, T> parser, string prefix)
     {
         bool valid;
         T value;
@@ -36,9 +40,16 @@ public abstract class ClientIO
         return value;
     }
 
-    public async Task<int> ReadAsync(int min, int max, string prefix="")
+    /// <summary>
+    /// Gets a valid integer from the IO.
+    /// </summary>
+    /// <param name="min">min value of the integer (inclusive)</param>
+    /// <param name="max">max value of the integer (inclusive)</param>
+    /// <param name="prefix">message before input, gives context to the user</param>
+    /// <returns></returns>
+    public Task<int> ReadAsync(int min, int max, string prefix="")
     {
-        return await ReadAsync((string? s, out int res) =>
+        return ReadAsync((string? s, out int res) =>
         {
             if (!int.TryParse(s, out res)) WriteLine("Answer should be a number!");
             if (min > res || res > max) WriteLine($"Answer should be within the range of {min} and {max}");

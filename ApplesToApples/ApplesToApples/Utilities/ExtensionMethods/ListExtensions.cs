@@ -4,19 +4,9 @@ namespace ApplesToApples.Utilities.ExtensionMethods;
 
 public static class ListExtensions
 {
-    //private static readonly Random Rng = new Random();
-    
-    /*public static void Shuffle<T>(this IList<T> list)
-    {
-        int n = list.Count;
-        while (n > 1)
-        {
-            n--;
-            int k = Rng.Next(n + 1);
-            (list[k], list[n]) = (list[n], list[k]);
-        }
-    }*/
-    
+    /// <summary>
+    /// Shuffles the list in place like a deck of cards
+    /// </summary>
     public static IList<T> Shuffle<T>(this IList<T> list)
     {
         int n = list.Count;
@@ -48,7 +38,7 @@ public static class ListExtensions
     }
 
     /// <summary>
-    /// Removes and returns the last item in the list
+    /// Removes and returns the last item in the list like a stack of cards
     /// </summary>
     public static T RemoveTop<T>(this IList<T> list)
     {

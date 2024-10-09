@@ -1,7 +1,12 @@
 namespace ApplesToApples.Utilities;
 
-public class TextFormatter
+public static class TextFormatter
 {
+    /// <summary>
+    /// Formats a message as a title with a boarder of "*" characters.
+    /// </summary>
+    /// <param name="message"></param>
+    /// <returns></returns>
     public static string Title(string message)
     {
         string result = "";

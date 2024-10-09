@@ -7,16 +7,24 @@ using ApplesToApples.Utilities.ExtensionMethods;
 
 namespace ApplesToApples.Game.Variations;
 
+/// <summary>
+/// Contains the logic for the standard game variation.
+/// </summary>
 public class StandardGame
 {
-    public PlayerPawn? Winner;
+    /// <summary>
+    /// Winner of the game. Null if no winner has been found yet.
+    /// </summary>
+    public PlayerPawn? Winner { get; private set; }
     public int NumberOfPlayers => _players.Count;
+    public event Action<IPlayerController> OnNewJudge;
 
     private readonly IPhaseMachine _context;
     private readonly List<IPlayerController> _controllers;
     private readonly List<PlayerPawn> _players;
     private readonly List<IRedApple> _redApples;
     private readonly List<GreenApple> _greenApples;
+    private JudgePhase _judgePhase;
 
     public StandardGame(List<IPlayerController> controllers)
     {
@@ -37,6 +45,10 @@ public class StandardGame
 
     }
 
+    /// <summary>
+    /// Steps through the game phases.
+    /// </summary>
+    /// <returns>True if there are more phases to execute</returns>
     public async Task<bool> Step()
     {
         bool hasNext = _context.MoveNext();
@@ -44,15 +56,15 @@ public class StandardGame
         
         return hasNext;
     }
-
-    public IPhaseMachine CreatePhases()
+    
+    private IPhaseMachine CreatePhases()
     {
         // Init phases
         ReplenishPhase replenishPhase = new ReplenishPhase(_redApples, _players);
-        DrawPhase drawPhase = new DrawPhase(_greenApples);
-        JudgePhase judgePhase = new JudgePhase(_controllers);
+        DrawPhase drawPhase = new DrawPhase(_greenApples); 
+        _judgePhase = new JudgePhase(_controllers);
         SubmitPhase submitPhase = new SubmitPhase(
-            () => _controllers.Where(c => c != judgePhase.CurrentJudge).ToArray(),
+            () => _controllers.Where(c => c != _judgePhase.CurrentJudge).ToArray(),
             () => drawPhase.Current);
         CheckWinnerPhase checkWinnerPhase = new CheckWinnerPhase(_players, IsWinner);
         
@@ -61,22 +73,25 @@ public class StandardGame
             replenishPhase,
             drawPhase,
             submitPhase,
-            judgePhase,
+            _judgePhase,
             checkWinnerPhase
         });
         
         // Set dynamic dependencies with events (observer pattern with dependency injection)
-        drawPhase.OnDraw += judgePhase.SetGreenApple;
-        submitPhase.OnSubmissons += judgePhase.SetSubmissions;
-        judgePhase.OnVerdict += (winner, _, greenApple) => winner.Pawn.GivePoint(greenApple);
+        drawPhase.OnDraw += _judgePhase.SetGreenApple;
+        submitPhase.OnSubmissons += _judgePhase.SetSubmissions;
+        _judgePhase.OnVerdict += (winner, _, greenApple) => winner.Pawn.GivePoint(greenApple);
+        _judgePhase.OnVerdict += (winner, _, _) =>
+            PlayerNotificationSystem.Broadcast($"{winner.Pawn.Name} won this round!", Channel.All);
+        _judgePhase.OnNewJudge += (judge) => OnNewJudge?.Invoke(judge);
         checkWinnerPhase.OnWinnerFound += _ => context.Finished();
         checkWinnerPhase.OnWinnerFound += winner => Winner = winner;
-        checkWinnerPhase.OnWinnerFound += winner => GameEventHandler.Broadcast($"{winner.Name} won the game", Channel.All);
+        checkWinnerPhase.OnWinnerFound += winner => PlayerNotificationSystem.Broadcast($"{winner.Name} won the game", Channel.All);
 
         return context;
     }
 
-    public static bool IsWinner(PlayerPawn player, int numPlayers)
+    private static bool IsWinner(PlayerPawn player, int numPlayers)
     {
         switch (numPlayers)
         {

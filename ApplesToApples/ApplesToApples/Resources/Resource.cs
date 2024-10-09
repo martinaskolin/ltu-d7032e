@@ -5,6 +5,9 @@ using ApplesToApples.Cards;
 
 namespace ApplesToApples.Resources;
 
+/// <summary>
+/// A static class that provides access to the game's resources.
+/// </summary>
 public static class Resource
 {
     private static ResourceManager _stringMng;
@@ -12,24 +15,16 @@ public static class Resource
     static Resource()
     {
         _stringMng = new ResourceManager("ApplesToApples.Resources.Resources", Assembly.GetExecutingAssembly());
-        
-        // TODO: Change this mess
-        // Set language
-        try
-        {
-            GetString("Menu.Title");
-        }
-        catch (MissingManifestResourceException)
-        {
-            Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture("en");
-        }
     }
 
-    public static string? GetString(string name)
+    private static string? GetString(string name)
     {
         return _stringMng.GetString(name);
     }
 
+    /// <summary>
+    /// Reads the list of red apples from the resources file and returns them as a list of RedApple objects.
+    /// </summary>
     public static List<RedApple> GetRedApples()
     {
         List<RedApple> redApples = new List<RedApple>();
@@ -43,6 +38,9 @@ public static class Resource
         return redApples;
     }
     
+    /// <summary>
+    /// Reads the list of green apples from the resources file and returns them as a list of GreenApple objects.
+    /// </summary>
     public static List<GreenApple> GetGreenApples()
     {
         List<GreenApple> greenApples = new List<GreenApple>();

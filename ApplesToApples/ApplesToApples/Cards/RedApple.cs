@@ -4,13 +4,14 @@ namespace ApplesToApples.Cards;
 
 public class RedApple : IRedApple
 {
-
-    public readonly string Noun;
+    private static int _numCards = 0;
+    private readonly string _noun;
+    private readonly int _id;
 
     public RedApple(string noun)
     {
-        Noun = noun;
-        
+        _noun = noun;
+        _id = _numCards++;
     }
     
     public override bool Equals(object? obj)
@@ -19,11 +20,12 @@ public class RedApple : IRedApple
             return false;
 
         RedApple other = (RedApple)obj;
-        return Noun == other.Noun;
+        return _id == other._id;
     }
 
+    /// <returns>Noun of the red apple</returns>
     public override string ToString()
     {
-        return Noun;
+        return _noun;
     }
 }

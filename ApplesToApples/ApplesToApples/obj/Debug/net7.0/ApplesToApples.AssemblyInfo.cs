@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ApplesToApples")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d1e598bb98d084b1420c5f7881213f6a7d439be9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cb2c0969b8e004adb271866552b90449f92cfb32")]
 [assembly: System.Reflection.AssemblyProductAttribute("ApplesToApples")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ApplesToApples")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

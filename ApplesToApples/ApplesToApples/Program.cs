@@ -8,7 +8,7 @@ List<IPlayerController> controllers = new List<IPlayerController>();
 
 LocalIO host = new LocalIO();
 controllers.Add(new HumanController(host, new PlayerPawn()));
-GameEventHandler.Subscribe(Channel.All, host.WriteLine);
+PlayerNotificationSystem.Subscribe(Channel.All, host.WriteLine);
 
 // Host local lobby
 if (args.Length == 0)
@@ -35,12 +35,12 @@ else if (int.TryParse(args[0], out int numOnlinePlayers))
     server.OnUserConnected += io =>
     {
         controllers.Add(new HumanController(io, new PlayerPawn()));
-        GameEventHandler.Subscribe(Channel.All, io.WriteLine);
-        GameEventHandler.Subscribe(Channel.External, io.WriteLine);
+        PlayerNotificationSystem.Subscribe(Channel.All, io.WriteLine);
+        PlayerNotificationSystem.Subscribe(Channel.External, io.WriteLine);
     };
-    server.OnUserConnected += _ => GameEventHandler.Broadcast("Player connected", Channel.All);
+    server.OnUserConnected += _ => PlayerNotificationSystem.Broadcast("Player connected", Channel.All);
     
-    GameEventHandler.Broadcast($"Waiting for {numOnlinePlayers} players to connect", Channel.All);
+    PlayerNotificationSystem.Broadcast($"Waiting for {numOnlinePlayers} players to connect", Channel.All);
     await server.AcceptConnectionsAsync(numOnlinePlayers);
     
     while(controllers.Count < 4)
@@ -56,7 +56,7 @@ else if (int.TryParse(args[0], out int numOnlinePlayers))
         done = !await game.Step();
     }
     
-    GameEventHandler.Broadcast(Server.CloseConnection, Channel.External);
+    PlayerNotificationSystem.Broadcast(Server.CloseConnection, Channel.External);
 }
 
 // Join as a client

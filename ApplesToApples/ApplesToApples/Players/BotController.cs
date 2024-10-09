@@ -3,6 +3,9 @@ using ApplesToApples.Utilities.ExtensionMethods;
 
 namespace ApplesToApples.Players;
 
+/// <summary>
+/// Controls a player pawn in Apples to Apples as an AI bot.
+/// </summary>
 public class BotController : IPlayerController
 {
     public PlayerPawn Pawn { get;}

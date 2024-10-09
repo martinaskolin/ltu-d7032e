@@ -11,14 +11,26 @@ namespace ApplesToApples.Players;
 /// </summary>
 public class PlayerPawn
 {
+    
+    /// <summary>
+    /// Event that is triggered when a player receives a new card.
+    /// </summary>
     public event Action<IRedApple> OnCardReceived;
+    /// <summary>
+    /// Event that is triggered when the player receives a point.
+    /// </summary>
     public event Action<GreenApple> OnPointReceived;
 
+    /// <summary>
+    /// Current points the player has. Calculated by the amount of green apples the player has.
+    /// </summary>
     public int Points => _greenApples.Count;
+    /// <summary>
+    /// The hand of the player, containing all red apples the player has.
+    /// </summary>
     public IRedApple[] Hand => _redApples.ToArray();
     public int NumberOfCardsInHand => _redApples.Count;
-    
-    public readonly int Id;
+
     public string Name;
     
     private readonly List<GreenApple> _greenApples = new List<GreenApple>();
@@ -27,8 +39,8 @@ public class PlayerPawn
     private static int _amountPlayers = 0;
     public PlayerPawn()
     {
-        Id = _amountPlayers++;
-        Name = $"Player {Id}";
+        var id = _amountPlayers++;
+        Name = $"Player {id}";
     }
 
     public void GivePoint(GreenApple greenApple)
@@ -44,15 +56,8 @@ public class PlayerPawn
     }
 
     /// <summary>
-    /// Tries to find and remove card from hand.
+    /// Removes a card from the player's hand at the specified index.
     /// </summary>
-    /// <param name="card">Card to remove</param>
-    /// <returns>If the card exists in the hand of the player</returns>
-    public bool RemoveCard(IRedApple card)
-    {
-        return _redApples.Remove(card);
-    }
-
     public IRedApple RemoveCard(int index)
     {
         return _redApples.Pop(index);

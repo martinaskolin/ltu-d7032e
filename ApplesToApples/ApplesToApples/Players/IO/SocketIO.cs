@@ -3,6 +3,10 @@ using System.Text;
 
 namespace ApplesToApples.Players.IO;
 
+/// <summary>
+/// Responsible for reading and writing to a socket.
+/// Expanded upon by ExternalIO for server client communication.
+/// </summary>
 public class SocketIO : ClientIO
 {
     private readonly Socket _socket;
@@ -35,7 +39,7 @@ public class SocketIO : ClientIO
         return Encoding.UTF8.GetString(messageBuffer, 0, received);
     }
 
-    public override async Task<string?> ReadAsync()
+    protected override async Task<string?> ReadAsync()
     {
         // Receive length of message
         byte[] lengthBuffer = new byte[4];

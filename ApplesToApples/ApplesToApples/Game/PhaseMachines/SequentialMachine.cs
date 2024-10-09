@@ -2,6 +2,9 @@ using ApplesToApples.Game.Phases;
 
 namespace ApplesToApples.Game.PhaseMachines;
 
+/// <summary>
+/// Loops over a list of phases sequentially until the method Finished is externally called.
+/// </summary>
 public class SequentialMachine : IPhaseMachine
 {
     private int _index = -1;
@@ -19,6 +22,9 @@ public class SequentialMachine : IPhaseMachine
         return !_finished;
     }
 
+    /// <summary>
+    /// Call this when the game is over
+    /// </summary>
     public void Finished()
     {
         _finished = true;

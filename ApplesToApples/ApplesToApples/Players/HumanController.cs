@@ -5,10 +5,13 @@ using ApplesToApples.Utilities;
 
 namespace ApplesToApples.Players;
 
+/// <summary>
+/// Controls a player pawn in Apples to Apples as a human player.
+/// </summary>
 public class HumanController : IPlayerController
 {
     public PlayerPawn Pawn { get; }
-    private ClientIO _io;
+    private readonly ClientIO _io;
 
     public HumanController(ClientIO io, PlayerPawn pawn)
     {
@@ -17,12 +20,13 @@ public class HumanController : IPlayerController
 
         pawn.OnCardReceived += (card) => _io.WriteLine($"You received a new card: {card}");
         pawn.OnPointReceived += _ => _io.WriteLine($"You've been awarded a point");
+        pawn.OnPointReceived += _ => _io.WriteLine($"You currently have {pawn.Points} points");
     }
 
     public async Task<RedApple> Play(GreenApple greenApple)
     {
         var hand = Pawn.Hand;
-        _io.WriteLine(TextFormatter.Title($"The Green Apple is {greenApple}"));
+        _io.WriteLine(TextFormatter.Title($"PLAYER - The Green Apple is {greenApple}"));
         _io.WriteLine("Choose a card to play");
         for (int i = 0; i < hand.Length; i++)
         {
@@ -37,7 +41,7 @@ public class HumanController : IPlayerController
 
     public async Task<(IPlayerController, RedApple)> Judge(List<(IPlayerController, RedApple)> submissions, GreenApple greenApple)
     {
-        _io.WriteLine(TextFormatter.Title($"The Green Apple is {greenApple}"));
+        _io.WriteLine(TextFormatter.Title($"JUDGE - The Green Apple is {greenApple}"));
         _io.WriteLine("Choose which Red Apple wins");
         for (int i = 0; i < submissions.Count; i++)
         {

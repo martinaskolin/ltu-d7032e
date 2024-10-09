@@ -4,6 +4,9 @@ using ApplesToApples.Utilities.ExtensionMethods;
 
 namespace ApplesToApples.Game.Phases;
 
+/// <summary>
+/// Phase where each player is given enough cards to have 7 cards in their hand
+/// </summary>
 public class ReplenishPhase : IGamePhase
 {
     private readonly List<IRedApple> _redApples;
@@ -15,9 +18,6 @@ public class ReplenishPhase : IGamePhase
         _players = pawns;
     }
     
-    /// <summary>
-    /// Fills up the hand of each player to 7 cards
-    /// </summary>
     public async Task Execute()
     {
         foreach (PlayerPawn player in _players)

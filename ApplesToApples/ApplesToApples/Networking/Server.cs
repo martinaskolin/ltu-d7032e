@@ -4,6 +4,9 @@ using ApplesToApples.Players.IO;
 
 namespace ApplesToApples.Networking;
 
+/// <summary>
+/// Simple server class that listens for connections and raises an event when a new connection is made.
+/// </summary>
 public class Server
 {
     public event Action<ClientIO>? OnUserConnected;
