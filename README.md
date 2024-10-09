@@ -10,22 +10,22 @@ Home Exam in D7032 at LTU. Apples to Apples is a party card game that revolves a
 ## Installation
 ```sh
     git clone https://github.com/martinaskolin/ltu-d7032e.git
-    cd ltu-d7032e
+    cd ltu-d7032e\ApplesToApples
 ```
 
 ## Running the Game
 1. Run the game locally against bots
     ```sh
-    .\ApplesToApples\ApplesToApples\bin\Release\net7.0\win-x64\ApplesToApples.exe
+    .\ApplesToApples\bin\Release\net7.0\win-x64\ApplesToApples.exe
     ```
 2. Run the game as a host
     ```sh
-    .\ApplesToApples\ApplesToApples\bin\Release\net7.0\win-x64\ApplesToApples.exe [Number of Player]
+    .\ApplesToApples\bin\Release\net7.0\win-x64\ApplesToApples.exe [Number of Player]
     ```
 
 2. Run the game as a client
     ```sh
-    .\ApplesToApples\ApplesToApples\bin\Release\net7.0\win-x64\ApplesToApples.exe [IP Address (localhost)]
+    .\ApplesToApples\bin\Release\net7.0\win-x64\ApplesToApples.exe [IP Address (localhost)]
     ```
 
 ## Running Tests
