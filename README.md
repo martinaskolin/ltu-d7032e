@@ -8,11 +8,10 @@ Home Exam in D7032 at LTU. Apples to Apples is a party card game that revolves a
 - Windows 64-bit OS
 
 ## Installation
-1. Clone the repository:
-    ```sh
+```sh
     git clone https://github.com/martinaskolin/ltu-d7032e.git
     cd ltu-d7032e
-    ```
+```
 
 ## Running the Game
 1. Run the game locally against bots
