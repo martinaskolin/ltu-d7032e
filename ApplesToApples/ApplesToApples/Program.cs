@@ -30,6 +30,12 @@ if (args.Length == 0)
 // Host online lobby
 else if (int.TryParse(args[0], out int numOnlinePlayers))
 {
+    if (numOnlinePlayers < 1)
+    {
+        host.WriteLine("Invalid number of players, must be at least 1");
+        return;
+    }
+    
     Server server = new Server("localhost", 2048);
 
     server.OnUserConnected += io =>
@@ -62,8 +68,15 @@ else if (int.TryParse(args[0], out int numOnlinePlayers))
 // Join as a client
 else
 {
-    Client client = new Client();
-    client.Connect(args[0], 2048);
+    try
+    {
+        Client client = new Client();
+        client.Connect(args[0], 2048);
+    } catch (Exception e)
+    {
+        host.WriteLine("Unable to connect to server, make sure the server is running and the IP address is correct");
+    }
+    
 }
 
 
