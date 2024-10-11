@@ -74,7 +74,9 @@ public class RulesTests
         List<IPlayerController> judges = new List<IPlayerController>();
         for (int i = 0; i < 100; i++)
         {
-            judges.Add(new JudgePhase(controllers).CurrentJudge);
+            JudgePhase phase = new JudgePhase(controllers);
+            phase.Initialize();
+            judges.Add(phase.CurrentJudge);
         }
         
         // Ensure that each player has been selected as judge at least once

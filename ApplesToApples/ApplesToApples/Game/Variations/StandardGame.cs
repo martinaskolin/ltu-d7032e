@@ -3,6 +3,7 @@ using ApplesToApples.Game.PhaseMachines;
 using ApplesToApples.Game.Phases;
 using ApplesToApples.Players;
 using ApplesToApples.Resources;
+using ApplesToApples.Utilities;
 using ApplesToApples.Utilities.ExtensionMethods;
 
 namespace ApplesToApples.Game.Variations;
@@ -67,11 +68,9 @@ public class StandardGame
             () => _controllers.Where(c => c != _judgePhase.CurrentJudge).ToArray(),
             () => drawPhase.Current);
         CheckWinnerPhase checkWinnerPhase = new CheckWinnerPhase(_players, IsWinner);
-        StartPhase startPhase = new StartPhase(() => _controllers.ToArray(), () => _judgePhase.CurrentJudge);
         
         SequentialMachine context = new SequentialMachine(new List<IPhase>()
         {
-            startPhase,
             replenishPhase,
             drawPhase,
             submitPhase,
@@ -80,15 +79,32 @@ public class StandardGame
         });
         
         // Set dynamic dependencies with events (observer pattern with dependency injection)
+        context.OnListReset += () =>
+        {
+            PlayerNotificationSystem.Broadcast(TextFormatter.Title("NEW ROUND"), Channel.Submitters);
+            PlayerNotificationSystem.Broadcast(TextFormatter.Title("JUDGE - NEW ROUND"), Channel.Judge);
+        };
+        drawPhase.OnDraw += apple => PlayerNotificationSystem.Broadcast("Green Apple: " + apple, Channel.All);
         drawPhase.OnDraw += _judgePhase.SetGreenApple;
         submitPhase.OnSubmissons += _judgePhase.SetSubmissions;
         _judgePhase.OnVerdict += (winner, _, greenApple) => winner.Pawn.GivePoint(greenApple);
         _judgePhase.OnVerdict += (winner, _, _) =>
             PlayerNotificationSystem.Broadcast($"{winner.Pawn.Name} won this round!", Channel.All);
         _judgePhase.OnNewJudge += (judge) => OnNewJudge?.Invoke(judge);
+        _judgePhase.OnNewJudge += judge =>
+        {
+            PlayerNotificationSystem.ClearSubscriptions(Channel.Judge);
+            PlayerNotificationSystem.ClearSubscriptions(Channel.Submitters);
+            PlayerNotificationSystem.TrySubscribePlayer(Channel.Judge, judge);
+            foreach (var submitters in _controllers.Where(c => c != judge))
+            {
+                PlayerNotificationSystem.TrySubscribePlayer(Channel.Submitters, submitters);
+            }
+        };
         checkWinnerPhase.OnWinnerFound += _ => context.Finished();
         checkWinnerPhase.OnWinnerFound += winner => Winner = winner;
         checkWinnerPhase.OnWinnerFound += winner => PlayerNotificationSystem.Broadcast($"{winner.Name} won the game", Channel.All);
+        _judgePhase.Initialize();
 
         return context;
     }

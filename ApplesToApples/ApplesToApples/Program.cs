@@ -8,8 +8,9 @@ using ApplesToApples.Players.IO;
 List<IPlayerController> controllers = new List<IPlayerController>();
 
 LocalIO host = new LocalIO();
-controllers.Add(new HumanController(host, new PlayerPawn()));
+controllers.Add(new HumanController(host , new PlayerPawn()));
 PlayerNotificationSystem.Subscribe(Channel.All, host.WriteLine);
+PlayerNotificationSystem.Subscribe(Channel.Local, host.WriteLine);
 
 // Host local lobby
 if (args.Length == 0)
@@ -34,7 +35,7 @@ else if (int.TryParse(args[0], out int numOnlinePlayers))
 {
     if (numOnlinePlayers < 1)
     {
-        host.WriteLine("Invalid number of players, must be at least 1");
+        PlayerNotificationSystem.Broadcast("Invalid number of players, must be at least 1", Channel.Local);
         return;
     }
     
@@ -68,11 +69,11 @@ else if (int.TryParse(args[0], out int numOnlinePlayers))
     }
     catch (SocketException)
     {
-        host.WriteLine("Lost connection to one of the players, closing game");
+        PlayerNotificationSystem.Broadcast("Lost connection to one of the players, closing game", Channel.Local);
     }
     catch (Exception)
     {
-        host.WriteLine("Game ended unexpectedly");
+        PlayerNotificationSystem.Broadcast("Game ended unexpectedly", Channel.Local);
     }
     
     PlayerNotificationSystem.Broadcast(Server.CloseConnection, Channel.External);
@@ -87,7 +88,7 @@ else
         client.Connect(args[0], 2048);
     } catch (Exception e)
     {
-        host.WriteLine("Unable to connect to server, make sure the server is running and the IP address is correct");
+        PlayerNotificationSystem.Broadcast("Unable to connect to server, make sure the server is running and the IP address is correct", Channel.Local);
     }
     
 }

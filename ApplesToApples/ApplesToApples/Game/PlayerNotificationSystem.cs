@@ -10,23 +10,46 @@ public static class PlayerNotificationSystem
 {
     
     private static Dictionary<Channel, Action<string>> _channels = new Dictionary<Channel, Action<string>>();
-
+    
+    
+    
     /// <summary>
-    /// Subscribes a player to a channel.
+    /// Try to subscribe a player to a channel. If the player is not a human player, ignore.
+    /// </summary>
+    public static void TrySubscribePlayer(Channel channel, IPlayerController player)
+    {
+        try
+        {
+            Subscribe(channel, ((HumanController)player).IO.WriteLine);
+        }
+        catch
+        {
+            // ignored
+        }
+    }
+    
+    /// <summary>
+    /// Clear subscriptions to a channel.
     /// </summary>
     /// <param name="channel"></param>
-    /// <param name="subscriber"></param>
-    public static void Subscribe(Channel channel, Action<string> subscriber)
+    public static void ClearSubscriptions(Channel channel)
+    {
+        try
+        {
+            _channels[channel].GetInvocationList().ToList().ForEach(del => _channels[channel] -= (Action<string>)del);
+        }
+        catch
+        {
+            // ignored
+        }
+    }
+    
+    public static void Subscribe(Channel channel, Action<string>? subscriber)
     { 
         if (!_channels.TryAdd(channel, subscriber)) _channels[channel] += subscriber;
     }
-
-    /// <summary>
-    /// Unsubscribes a player from a channel.
-    /// </summary>
-    /// <param name="channel"></param>
-    /// <param name="subscriber"></param>
-    public static void Unsubscribe(Channel channel, Action<string> subscriber)
+    
+    private static void Unsubscribe(Channel channel, Action<string>? subscriber)
     {
         if (_channels.ContainsKey(channel)) _channels[channel] -= subscriber;
     }
@@ -48,22 +71,13 @@ public static class PlayerNotificationSystem
         }
     }
     
-    public static void TryBroadcast(string msg, IPlayerController player)
-    {
-        try
-        {
-            ((HumanController)player).IO.WriteLine(msg);
-        }
-        catch
-        {
-            // ignored
-        }
-    }
-    
 }
 
 public enum Channel
 {
     All,
-    External
+    External,
+    Local,
+    Judge,
+    Submitters
 }

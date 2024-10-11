@@ -7,6 +7,8 @@ namespace ApplesToApples.Game.PhaseMachines;
 /// </summary>
 public class SequentialMachine : IPhaseMachine
 {
+    public event Action OnListReset;
+    
     private int _index = -1;
     private readonly List<IPhase> _phases;
     private bool _finished = false;
@@ -19,6 +21,7 @@ public class SequentialMachine : IPhaseMachine
     public bool MoveNext()
     {
         _index = (_index + 1) % _phases.Count;
+        if (_index == 0) OnListReset?.Invoke();
         return !_finished;
     }
 

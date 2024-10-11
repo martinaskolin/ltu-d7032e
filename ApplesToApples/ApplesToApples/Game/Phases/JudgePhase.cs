@@ -31,21 +31,25 @@ public class JudgePhase : IPhase
 
     public JudgePhase(List<IPlayerController> controllers)
     {
-        _index = new Random().Next(0, controllers.Count);
         _controllers = controllers;
+    }
+    
+    public void Initialize()
+    {
+        _index = new Random().Next(0, _controllers.Count);
+        OnNewJudge?.Invoke(CurrentJudge);
     }
     
     public async Task Execute()
     {
-        IPlayerController judge = _controllers[_index];
-        OnNewJudge?.Invoke(judge);
         List<(IPlayerController, RedApple)> submissions = _submissions ?? throw new NullReferenceException("No submissions found");
         GreenApple greenApple = _greenApple ?? throw new NullReferenceException("No green apple found");
 
-        (var winner, var submission) = await judge.Judge(submissions, greenApple);
-        
+        (var winner, var submission) = await CurrentJudge.Judge(submissions, greenApple);
         OnVerdict?.Invoke(winner, submission, greenApple);
+        
         _index = (_index + 1) % _controllers.Count;
+        OnNewJudge?.Invoke(CurrentJudge);
     }
 
     /// <summary>

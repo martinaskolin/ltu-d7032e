@@ -25,6 +25,5 @@ public class DrawPhase : IPhase
     {
         Current = _drawPile.RemoveTop();
         OnDraw?.Invoke(Current);
-        PlayerNotificationSystem.Broadcast("Green Apple: " + Current, Channel.All);
     }
 }
