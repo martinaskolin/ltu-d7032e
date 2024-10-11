@@ -1,4 +1,5 @@
-﻿using ApplesToApples.Game;
+﻿using System.Net.Sockets;
+using ApplesToApples.Game;
 using ApplesToApples.Game.Variations;
 using ApplesToApples.Networking;
 using ApplesToApples.Players;
@@ -20,6 +21,7 @@ if (args.Length == 0)
     
     StandardGame game = new StandardGame(controllers);
 
+    
     bool done = false;
     while (!done)
     {
@@ -56,10 +58,21 @@ else if (int.TryParse(args[0], out int numOnlinePlayers))
     
     StandardGame game = new StandardGame(controllers);
 
-    bool done = false;
-    while (!done)
+    try
     {
-        done = !await game.Step();
+        bool done = false;
+        while (!done)
+        {
+            done = !await game.Step();
+        }
+    }
+    catch (SocketException)
+    {
+        host.WriteLine("Lost connection to one of the players, closing game");
+    }
+    catch (Exception)
+    {
+        host.WriteLine("Game ended unexpectedly");
     }
     
     PlayerNotificationSystem.Broadcast(Server.CloseConnection, Channel.External);
