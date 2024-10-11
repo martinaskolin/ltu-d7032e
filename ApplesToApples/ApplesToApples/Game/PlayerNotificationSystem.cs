@@ -48,6 +48,18 @@ public static class PlayerNotificationSystem
         }
     }
     
+    public static void TryBroadcast(string msg, IPlayerController player)
+    {
+        try
+        {
+            ((HumanController)player).IO.WriteLine(msg);
+        }
+        catch
+        {
+            // ignored
+        }
+    }
+    
 }
 
 public enum Channel

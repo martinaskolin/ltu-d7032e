@@ -7,7 +7,7 @@ namespace ApplesToApples.Game.Phases;
 /// <summary>
 /// Phase where each player is given enough cards to have 7 cards in their hand
 /// </summary>
-public class ReplenishPhase : IGamePhase
+public class ReplenishPhase : IPhase
 {
     private readonly List<IRedApple> _redApples;
     private readonly List<PlayerPawn> _players;

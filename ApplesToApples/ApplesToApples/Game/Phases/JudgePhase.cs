@@ -6,7 +6,7 @@ namespace ApplesToApples.Game.Phases;
 /// <summary>
 /// Phase responsible for selecting a judge and judging submissions.
 /// </summary>
-public class JudgePhase : IGamePhase
+public class JudgePhase : IPhase
 {
     /// <summary>
     /// Invoked when a new judge is selected. Contains the new judge.

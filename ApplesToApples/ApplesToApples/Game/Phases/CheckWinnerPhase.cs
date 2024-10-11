@@ -5,7 +5,7 @@ namespace ApplesToApples.Game.Phases;
 /// <summary>
 /// Phase for checking if any player has won the game
 /// </summary>
-public class CheckWinnerPhase : IGamePhase
+public class CheckWinnerPhase : IPhase
 {
     /// <summary>
     /// Invoked when a winner is found

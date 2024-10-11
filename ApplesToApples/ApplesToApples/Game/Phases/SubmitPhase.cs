@@ -7,7 +7,7 @@ namespace ApplesToApples.Game.Phases;
 /// <summary>
 /// Phase where players submit their red apple cards based on the green apple card.
 /// </summary>
-public class SubmitPhase : IGamePhase
+public class SubmitPhase : IPhase
 {
     /// <summary>
     /// Invoked when all players have submitted their red apple cards. Order of the list is random.

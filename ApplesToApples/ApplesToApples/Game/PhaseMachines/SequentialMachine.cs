@@ -8,10 +8,10 @@ namespace ApplesToApples.Game.PhaseMachines;
 public class SequentialMachine : IPhaseMachine
 {
     private int _index = -1;
-    private readonly List<IGamePhase> _phases;
+    private readonly List<IPhase> _phases;
     private bool _finished = false;
 
-    public SequentialMachine(List<IGamePhase> phases)
+    public SequentialMachine(List<IPhase> phases)
     {
         _phases = phases;
     }
@@ -30,5 +30,5 @@ public class SequentialMachine : IPhaseMachine
         _finished = true;
     }
 
-    public IGamePhase Current => _phases[_index];
+    public IPhase Current => _phases[_index];
 }

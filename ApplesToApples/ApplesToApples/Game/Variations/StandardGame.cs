@@ -67,9 +67,11 @@ public class StandardGame
             () => _controllers.Where(c => c != _judgePhase.CurrentJudge).ToArray(),
             () => drawPhase.Current);
         CheckWinnerPhase checkWinnerPhase = new CheckWinnerPhase(_players, IsWinner);
+        StartPhase startPhase = new StartPhase(() => _controllers.ToArray(), () => _judgePhase.CurrentJudge);
         
-        SequentialMachine context = new SequentialMachine(new List<IGamePhase>()
+        SequentialMachine context = new SequentialMachine(new List<IPhase>()
         {
+            startPhase,
             replenishPhase,
             drawPhase,
             submitPhase,

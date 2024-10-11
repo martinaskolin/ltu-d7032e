@@ -11,44 +11,42 @@ namespace ApplesToApples.Players;
 public class HumanController : IPlayerController
 {
     public PlayerPawn Pawn { get; }
-    private readonly ClientIO _io;
+    public readonly ClientIO IO;
 
     public HumanController(ClientIO io, PlayerPawn pawn)
     {
         Pawn = pawn;
-        _io = io;
+        IO = io;
 
-        pawn.OnCardReceived += (card) => _io.WriteLine($"You received a new card: {card}");
-        pawn.OnPointReceived += _ => _io.WriteLine($"You've been awarded a point");
-        pawn.OnPointReceived += _ => _io.WriteLine($"You currently have {pawn.Points} points");
+        pawn.OnCardReceived += (card) => IO.WriteLine($"You received a new card: {card}");
+        pawn.OnPointReceived += _ => IO.WriteLine($"You've been awarded a point");
+        pawn.OnPointReceived += _ => IO.WriteLine($"You currently have {pawn.Points} points");
     }
 
     public async Task<RedApple> Play(GreenApple greenApple)
     {
         var hand = Pawn.Hand;
-        _io.WriteLine(TextFormatter.Title($"PLAYER - The Green Apple is {greenApple}"));
-        _io.WriteLine("Choose a card to play");
+        IO.WriteLine("Choose a card to play");
         for (int i = 0; i < hand.Length; i++)
         {
-            _io.WriteLine($"{i} {hand[i]}");
+            IO.WriteLine($"{i} {hand[i]}");
         }
         
-        int index = await _io.ReadAsync(0, hand.Length-1, "Play card number: ");
+        int index = await IO.ReadAsync(0, hand.Length-1, "Play card number: ");
         
-        _io.WriteLine("Waiting for other players...");
+        IO.WriteLine("Waiting for other players...");
         return (RedApple)Pawn.RemoveCard(index);
     }
 
     public async Task<(IPlayerController, RedApple)> Judge(List<(IPlayerController, RedApple)> submissions, GreenApple greenApple)
     {
-        _io.WriteLine(TextFormatter.Title($"JUDGE - The Green Apple is {greenApple}"));
-        _io.WriteLine("Choose which Red Apple wins");
+        IO.WriteLine("Choose which Red Apple wins");
         for (int i = 0; i < submissions.Count; i++)
         {
-            _io.WriteLine($"{i} {submissions[i].Item2}");
+            IO.WriteLine($"{i} {submissions[i].Item2}");
         }
         
-        int index = await _io.ReadAsync(0, submissions.Count-1, "Winner is card number: ");
+        int index = await IO.ReadAsync(0, submissions.Count-1, "Winner is card number: ");
 
         return submissions[index];
     }

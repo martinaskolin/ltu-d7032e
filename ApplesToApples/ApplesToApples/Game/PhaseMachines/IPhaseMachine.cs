@@ -13,5 +13,5 @@ public interface IPhaseMachine
     /// <summary>
     /// Current phase, usually called after calling MoveNext
     /// </summary>
-    public IGamePhase Current { get; }
+    public IPhase Current { get; }
 }

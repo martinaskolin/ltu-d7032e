@@ -3,7 +3,7 @@ namespace ApplesToApples.Game.Phases;
 /// <summary>
 /// Interface for game phases
 /// </summary>
-public interface IGamePhase
+public interface IPhase
 {
     /// <summary>
     /// Executes the phase

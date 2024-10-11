@@ -6,7 +6,7 @@ namespace ApplesToApples.Game.Phases;
 /// <summary>
 /// Phase where a card is drawn from the draw pile.
 /// </summary>
-public class DrawPhase : IGamePhase
+public class DrawPhase : IPhase
 {
     /// <summary>
     /// Invoked when a card is drawn.
@@ -25,5 +25,6 @@ public class DrawPhase : IGamePhase
     {
         Current = _drawPile.RemoveTop();
         OnDraw?.Invoke(Current);
+        PlayerNotificationSystem.Broadcast("Green Apple: " + Current, Channel.All);
     }
 }
